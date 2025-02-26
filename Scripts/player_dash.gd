@@ -1,9 +1,9 @@
 extends AnimatedSprite2D
 
-@onready var direction = get_parent().get_node("Player").direction
+var direction 
 
 func _ready() -> void:
-	print(direction)
+	pass
 
 func _physics_process(delta: float) -> void:
 	if direction < 0:

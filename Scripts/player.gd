@@ -1,20 +1,21 @@
 extends CharacterBody2D
 
 const JUMP_VELOCITY = -400.0
-const MAX_HEALTH = 10
+const MAX_HEALTH = 100
 
-const maxSpeed:float = 60000
+const maxSpeed:float = 45000
 var acceleration:float = 5000
 var jumpHeight:float = 40000
 var doubleJumpHeight:float = 80000
 var direction:int = 0
-var health:float = 10
+var health:float = 100
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var friction:float = 0.2
 var weight:float = 0.6
 var isFalling:bool = false
 var gunDirection
 var gunPositionX:float = 50
+var dashDamage:float = 75
 
 #States
 var currentState:String = ""
@@ -54,9 +55,7 @@ func _physics_process(delta: float) -> void:
 	elif direction > 0:
 		anim.flip_h = false
 		
-		
-	velocity.x = direction * maxSpeed * delta
-	
+
 	# Add the gravity.
 	if not is_on_floor():
 		var targetVel:float = min(velocity.y + acceleration * delta, maxSpeed * delta) 
@@ -70,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	#Check for shooting
 	if Input.is_action_just_pressed("Shoot"):
 		if CanShoot(get_global_mouse_position()):
-			$Gun/BulletSpawn/CPUParticles2D.emitting = true
+			SpawnBulletParticles()
 			var bulletTemp = bulletScene.instantiate()
 			bulletTemp.position = bulletSpawn.global_position
 			bulletTemp.direction = (get_global_mouse_position() - bulletSpawn.global_position).normalized()
@@ -86,8 +85,9 @@ func ChangeState(newStateName:String):
 			get_node("States").get_child(state).reset_node()
 
 func _process(delta: float) -> void:
-	pass
-
+	if health <= 0:
+		Death()
+		
 func CanShoot(mouse_pos: Vector2) -> bool:
 	var player_facing = Vector2(gunDirection, 0) # Player's facing direction (-1 or 1)
 	var to_mouse = (mouse_pos - global_position).normalized() # Direction to the mouse
@@ -100,4 +100,12 @@ func CanShoot(mouse_pos: Vector2) -> bool:
 	return dot > 0 and angle < max_angle
 
 func SpawnBulletParticles():
-	pass
+	$Gun/BulletSpawn/CPUParticles2D.emitting = true
+	
+func TakeDamage(amount:float):
+	await get_tree().create_timer(0.25).timeout
+	$BloodParticles.emitting = true
+	health -= amount
+
+func Death():
+	print("You are dead")

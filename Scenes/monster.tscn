@@ -1,24 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://bpsrqniuk7pro"]
+[gd_scene load_steps=10 format=3 uid="uid://bpsrqniuk7pro"]
 
 [ext_resource type="Script" path="res://Scripts/monster.gd" id="1_lblbk"]
 [ext_resource type="Texture2D" uid="uid://bxwouiqnj8a4f" path="res://Assets/Enemies1.png" id="2_drkc0"]
+[ext_resource type="Texture2D" uid="uid://ch78y2wmi55o4" path="res://Assets/EnemyHPUnder.png" id="3_gikbv"]
+[ext_resource type="Texture2D" uid="uid://duep0txgwg72n" path="res://Assets/EnemyHPProgress.png" id="4_347yi"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jk6de"]
+[sub_resource type="Gradient" id="Gradient_d3civ"]
+colors = PackedColorArray(1, 0.916, 0.64, 1, 0.928777, 0.973837, 7.70092e-07, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rylvv"]
+size = Vector2(86.365, 75.99)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eedro"]
 size = Vector2(85.525, 76.61)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5nfe"]
-size = Vector2(98.575, 78.495)
+size = Vector2(114.4, 97.92)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o58n3"]
-radius = 450.0
+radius = 194.812
 
 [node name="Monster" type="CharacterBody2D" groups=["Monster"]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_lblbk")
 
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+z_index = 10
+scale = Vector2(2, 2)
+emitting = false
+amount = 60
+lifetime = 1.5
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -1)
+spread = 48.0
+gravity = Vector2(0, 64)
+initial_velocity_max = 50.0
+radial_accel_max = 30.0
+scale_amount_max = 5.0
+color = Color(0.803643, 0.648899, 7.70092e-07, 1)
+color_ramp = SubResource("Gradient_d3civ")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_jk6de")
+shape = SubResource("RectangleShape2D_rylvv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_drkc0")
@@ -26,31 +54,73 @@ region_enabled = true
 region_rect = Rect2(224.221, 28.2361, 85.6872, 78.2361)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(57, 0)
+collision_mask = 256
 
 [node name="CliffCheck" type="RayCast2D" parent="."]
-visible = false
 position = Vector2(62, 0)
+collision_mask = 256
 
 [node name="ShootCheck" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
 
 [node name="HeadDamage" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadDamage"]
 shape = SubResource("RectangleShape2D_eedro")
 
 [node name="DamagePlayerArea" type="Area2D" parent="."]
-visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamagePlayerArea"]
+position = Vector2(0, -10.315)
 shape = SubResource("RectangleShape2D_r5nfe")
 
 [node name="AggroArea" type="Area2D" parent="."]
-visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
 shape = SubResource("CircleShape2D_o58n3")
 
 [node name="ShootTimer" type="Timer" parent="."]
+
+[node name="DashDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashDetector"]
+position = Vector2(0, -10.315)
+shape = SubResource("RectangleShape2D_r5nfe")
+
+[node name="MeleeAttackTimer" type="Timer" parent="."]
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -56.0
+offset_right = 1676.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.06, 0.06)
+value = 50.0
+texture_under = ExtResource("3_gikbv")
+texture_progress = ExtResource("4_347yi")
+
+[connection signal="body_entered" from="HeadDamage" to="." method="_on_head_damage_body_entered"]
+[connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]
+[connection signal="body_exited" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_exited"]
+[connection signal="body_entered" from="AggroArea" to="." method="_on_aggro_area_body_entered"]
+[connection signal="body_exited" from="AggroArea" to="." method="_on_aggro_area_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="DashDetector" to="." method="_on_dash_detector_body_entered"]
+[connection signal="body_exited" from="DashDetector" to="." method="_on_dash_detector_body_exited"]
+[connection signal="timeout" from="MeleeAttackTimer" to="." method="_on_melee_attack_timer_timeout"]

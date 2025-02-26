@@ -10,11 +10,10 @@ func reset_node() -> void:
 	pos = player.anim.flip_h
 	player.canDash = false
 	if pos:
-		player.velocity.x = -2000
+		player.velocity.x = -1000
 	else:
-		player.velocity.x = 2000
-	await get_tree().create_timer(0.2).timeout
-	
+		player.velocity.x = 1000
+	await get_tree().create_timer(0.4).timeout
 	player.ChangeState("idle")
 
 #this could be a bug of which way to flip the dash sprite

@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://bg5wktugvcw2n"]
+[gd_scene load_steps=14 format=4 uid="uid://bg5wktugvcw2n"]
 
+[ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_82jb8"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="1_bq4wr"]
 [ext_resource type="TileSet" uid="uid://dmrru0s7v1ncs" path="res://Assets/BGTileSet.tres" id="2_cqfda"]
 [ext_resource type="PackedScene" uid="uid://pq0b8qft3g1w" path="res://Assets/tile_map_layer.tscn" id="2_o5bk2"]
@@ -7,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://d20gt6bthh7hf" path="res://Scenes/doublejumppickup.tscn" id="5_ac1gl"]
 [ext_resource type="Script" path="res://Scripts/doublejumppickup.gd" id="6_sjwkj"]
 [ext_resource type="PackedScene" uid="uid://dhv2iupu3566a" path="res://Scenes/monsterskull.tscn" id="7_i826e"]
+[ext_resource type="PackedScene" uid="uid://dx865o7n46ush" path="res://Scenes/monsterbug.tscn" id="8_wcrnr"]
+[ext_resource type="PackedScene" uid="uid://cpwqyq3hl2leu" path="res://Scenes/monsterboss1.tscn" id="9_nym6j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j47rm"]
 texture = ExtResource("4_v28vk")
@@ -154,7 +157,11 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_j47rm")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei6j1"]
+size = Vector2(600, 309.72)
+
 [node name="Level1" type="Node"]
+script = ExtResource("1_82jb8")
 
 [node name="Player" parent="." instance=ExtResource("1_bq4wr")]
 position = Vector2(132.315, 348.715)
@@ -172,16 +179,34 @@ tile_map_data = PackedByteArray("AAABAAAAAQACAAAAADAAAAEAAQACAAAAAFAAAAIAAQACAAA
 
 [node name="TileMapLayerMisc" parent="." instance=ExtResource("2_o5bk2")]
 modulate = Color(0.5, 0.5, 0.5, 1)
-tile_map_data = PackedByteArray("AAD3/w4AAQAAAAMAAAD4/w4AAQAAAAMAAAD3/w0AAQAAAAMAAAAaAAEAAQAMAAIAAAAvAAIAAQAJAAMAADAwAAIAAQAJAAMAADAxAAIAAQAJAAMAADAyAAIAAQAJAAMAADAzAAIAAQAJAAMAADA0AAIAAQAJAAMAADA1AAIAAQAJAAMAADAlAAEAAQAJAAMAADAmAAEAAQAJAAMAADAnAAEAAQAJAAMAADAoAAEAAQAJAAMAADApAAEAAQAJAAMAADA6AAkAAQAJAAQAAAA7AAkAAQAJAAQAAAA8AAkAAQAJAAQAAAA9AAkAAQAJAAQAAAA+AAkAAQAJAAQAAAA/AAkAAQAJAAQAAABAAAkAAQAJAAQAAABBAAkAAQAJAAQAAABCAAkAAQAJAAQAAABDAAkAAQAJAAQAAABEAAkAAQAJAAQAAABFAAkAAQAJAAQAAABGAAkAAQAJAAQAAABHAAkAAQAJAAQAAABIAAkAAQAJAAQAAABJAAgAAQAJAAQAAGBJAAcAAQAJAAQAAGBJAAYAAQAJAAQAAGBJAAUAAQAJAAQAAGBJAAQAAQAJAAQAAABKAAQAAQAJAAQAAABLAAQAAQAJAAQAAABMAAQAAQAJAAQAAABNAAQAAQAJAAQAAABOAAQAAQAJAAQAAABPAAQAAQAJAAQAAABQAAQAAQAJAAQAAABRAAQAAQAJAAQAAABSAAQAAQAJAAQAAABTAAQAAQAJAAQAAABUAAQAAQAJAAQAAABVAAQAAQAJAAQAAABWAAQAAQAJAAQAAABXAAQAAQAJAAQAAABYAAQAAQAJAAQAAABZAAQAAQAJAAQAAABaAAQAAQAJAAQAAABbAAQAAQAJAAQAAABcAAQAAQAJAAQAAABdAAQAAQAJAAQAAABeAAQAAQAJAAQAAABfAAQAAQAJAAQAAABgAAQAAQAJAAQAAABhAAQAAQAJAAQAAABiAAQAAQAJAAQAAABjAAQAAQAJAAQAAABkAAQAAQAJAAQAAABlAAQAAQAJAAQAAABmAAQAAQAJAAQAAABCABIAAQAKAAUAAABIABIAAQABAAMAAABHABIAAQABAAMAAAA=")
+tile_map_data = PackedByteArray("AAD3/w4AAQAAAAMAAAD4/w4AAQAAAAMAAAD3/w0AAQAAAAMAAAAaAAEAAQAMAAIAAAAvAAIAAQAJAAMAADAwAAIAAQAJAAMAADAxAAIAAQAJAAMAADAyAAIAAQAJAAMAADAzAAIAAQAJAAMAADA0AAIAAQAJAAMAADA1AAIAAQAJAAMAADAlAAEAAQAJAAMAADAmAAEAAQAJAAMAADAnAAEAAQAJAAMAADAoAAEAAQAJAAMAADApAAEAAQAJAAMAADA6AAkAAQAJAAQAAAA7AAkAAQAJAAQAAAA8AAkAAQAJAAQAAAA9AAkAAQAJAAQAAAA+AAkAAQAJAAQAAAA/AAkAAQAJAAQAAABAAAkAAQAJAAQAAABBAAkAAQAJAAQAAABCAAkAAQAJAAQAAABDAAkAAQAJAAQAAABEAAkAAQAJAAQAAABFAAkAAQAJAAQAAABGAAkAAQAJAAQAAABHAAkAAQAJAAQAAABIAAkAAQAJAAQAAABJAAgAAQAJAAQAAGBJAAcAAQAJAAQAAGBJAAYAAQAJAAQAAGBJAAUAAQAJAAQAAGBJAAQAAQAJAAQAAABKAAQAAQAJAAQAAABLAAQAAQAJAAQAAABMAAQAAQAJAAQAAABNAAQAAQAJAAQAAABOAAQAAQAJAAQAAABPAAQAAQAJAAQAAABQAAQAAQAJAAQAAABRAAQAAQAJAAQAAABSAAQAAQAJAAQAAABTAAQAAQAJAAQAAABUAAQAAQAJAAQAAABVAAQAAQAJAAQAAABWAAQAAQAJAAQAAABXAAQAAQAJAAQAAABYAAQAAQAJAAQAAABZAAQAAQAJAAQAAABaAAQAAQAJAAQAAABbAAQAAQAJAAQAAABcAAQAAQAJAAQAAABdAAQAAQAJAAQAAABeAAQAAQAJAAQAAABfAAQAAQAJAAQAAABgAAQAAQAJAAQAAABhAAQAAQAJAAQAAABiAAQAAQAJAAQAAABjAAQAAQAJAAQAAABkAAQAAQAJAAQAAABlAAQAAQAJAAQAAABmAAQAAQAJAAQAAABIABIAAQABAAMAAABHABIAAQABAAMAAABGABIAAQAKAAUAAAA=")
 tile_set = SubResource("TileSet_8jbop")
 
 [node name="Doublejumppickup" parent="." instance=ExtResource("5_ac1gl")]
 position = Vector2(7122, 1642)
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("6_sjwkj")
 
 [node name="BulletContainer" type="Node" parent="."]
 
 [node name="MonsterSkull" parent="." instance=ExtResource("7_i826e")]
-position = Vector2(767.489, 383.965)
+position = Vector2(671.619, 383.965)
+
+[node name="MonsterBug" parent="." instance=ExtResource("8_wcrnr")]
+position = Vector2(-324.229, 1006.66)
+
+[node name="MonsterBoss1" parent="." instance=ExtResource("9_nym6j")]
+position = Vector2(6741.43, 1486.3)
+
+[node name="BossTrigger" type="Area2D" parent="."]
+position = Vector2(5464.24, 1377.84)
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossTrigger"]
+position = Vector2(-46.021, 138.534)
+shape = SubResource("RectangleShape2D_ei6j1")
 
 [connection signal="body_entered" from="Doublejumppickup" to="Doublejumppickup" method="_on_body_entered"]
+[connection signal="body_entered" from="BossTrigger" to="MonsterBoss1" method="_on_boss_trigger_body_entered"]

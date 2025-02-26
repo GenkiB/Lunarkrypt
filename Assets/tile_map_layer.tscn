@@ -2,5 +2,5 @@
 
 [ext_resource type="TileSet" uid="uid://kaf2pui1ocdu" path="res://Assets/MapTileset.tres" id="1_5ee7k"]
 
-[node name="TileMapLayer" type="TileMapLayer"]
+[node name="TileMapLayer" type="TileMapLayer" groups=["Walls"]]
 tile_set = ExtResource("1_5ee7k")

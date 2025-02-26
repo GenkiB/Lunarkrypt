@@ -67,7 +67,28 @@ point_count = 3
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.4, 0.4)
+collision_layer = 2
+collision_mask = 21
 script = ExtResource("1_becjd")
+
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+z_index = 10
+scale = Vector2(2, 2)
+emitting = false
+amount = 80
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 25.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 64)
+initial_velocity_max = 150.0
+radial_accel_max = 30.0
+scale_amount_max = 5.0
+color = Color(0.693131, 0.0405228, 9.62615e-08, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1

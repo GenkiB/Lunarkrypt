@@ -6,7 +6,6 @@
 texture = ExtResource("1_v7760")
 texture_region_size = Vector2i(70, 70)
 0:0/0 = 0
-0:0/0/terrain = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 1:0/0 = 0
 1:0/0/terrain_set = 0
@@ -143,7 +142,8 @@ texture_region_size = Vector2i(70, 70)
 
 [resource]
 tile_size = Vector2i(70, 70)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 257
+physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
