@@ -1,0 +1,126 @@
+[gd_scene load_steps=17 format=3 uid="uid://btc1iel6mbh5l"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_becjd"]
+[ext_resource type="Texture2D" uid="uid://bv4vgq6d0sryw" path="res://Assets/Player.png" id="2_p1oh4"]
+[ext_resource type="Script" path="res://Assets/States/idle_state.gd" id="3_od85q"]
+[ext_resource type="Script" path="res://Assets/States/move_state.gd" id="4_40ibk"]
+[ext_resource type="Script" path="res://Assets/States/jump_state.gd" id="5_84vs8"]
+[ext_resource type="Script" path="res://Assets/States/fall_state.gd" id="6_gpoqi"]
+[ext_resource type="Script" path="res://Assets/States/dash_state.gd" id="7_pmo78"]
+[ext_resource type="Texture2D" uid="uid://i5rryx2rmx47" path="res://Assets/Weapons and Items.png" id="8_i1bme"]
+[ext_resource type="Texture2D" uid="uid://boqoa7luxgf5v" path="res://Assets/ExplosionParticles.png" id="9_0rx3c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp4d0"]
+atlas = ExtResource("2_p1oh4")
+region = Rect2(0, 0, 419, 417)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl8ie"]
+atlas = ExtResource("2_p1oh4")
+region = Rect2(838, 0, 419, 417)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wjug"]
+atlas = ExtResource("2_p1oh4")
+region = Rect2(419, 0, 419, 417)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6yxa"]
+atlas = ExtResource("2_p1oh4")
+region = Rect2(419, 417, 419, 417)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3drr1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp4d0")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl8ie")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wjug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6yxa")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odpbn"]
+radius = 123.0
+height = 345.0
+
+[sub_resource type="Curve" id="Curve_jq0ns"]
+max_value = 2.0
+_data = [Vector2(0, 0.725275), 0.0, 0.0, 0, 0, Vector2(0.494382, 1.23077), 0.0, 0.0, 0, 0, Vector2(1, 0.571429), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_becjd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3drr1")
+animation = &"Move"
+frame_progress = 0.162931
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_odpbn")
+
+[node name="States" type="Node" parent="."]
+
+[node name="idle_state" type="Node" parent="States"]
+script = ExtResource("3_od85q")
+
+[node name="move_state" type="Node" parent="States"]
+script = ExtResource("4_40ibk")
+
+[node name="jump_state" type="Node" parent="States"]
+script = ExtResource("5_84vs8")
+
+[node name="fall_state" type="Node" parent="States"]
+script = ExtResource("6_gpoqi")
+
+[node name="dash_state" type="Node" parent="States"]
+script = ExtResource("7_pmo78")
+
+[node name="Gun" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(50, 15)
+scale = Vector2(2.925, 2.925)
+texture = ExtResource("8_i1bme")
+region_enabled = true
+region_rect = Rect2(271.141, 224.001, 111.114, 50.4676)
+
+[node name="BulletSpawn" type="Marker2D" parent="Gun"]
+position = Vector2(54.7009, -8.54701)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Gun/BulletSpawn"]
+emitting = false
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.25
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("9_0rx3c")
+spread = 67.27
+initial_velocity_max = 282.83
+scale_amount_min = 0.0
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_jq0ns")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position_smoothing_enabled = true
+position_smoothing_speed = 12.0

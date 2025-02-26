@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://jkk3tqdmg301"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_uy82l"]
+[ext_resource type="Texture2D" uid="uid://co65uy4f3xrny" path="res://Assets/RoundBullet.png" id="2_k0k12"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_26jcm"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8hx8"]
+
+[node name="BulletScene" type="CharacterBody2D"]
+scale = Vector2(0.405, 0.405)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_uy82l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_26jcm")
+
+[node name="BulletArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletArea"]
+shape = SubResource("CircleShape2D_s8hx8")
+
+[node name="Panel" type="TextureRect" parent="BulletArea"]
+modulate = Color(0.5115, 0.93, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -677.0
+offset_top = -614.0
+offset_right = 679.0
+offset_bottom = 614.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.02, 0.02)
+pivot_offset = Vector2(678, 614)
+texture = ExtResource("2_k0k12")
+
+[connection signal="body_entered" from="BulletArea" to="." method="_on_bullet_area_body_entered"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhv2iupu3566a"]
+
+[ext_resource type="PackedScene" uid="uid://bpsrqniuk7pro" path="res://Scenes/monster.tscn" id="1_fg6eg"]
+[ext_resource type="Script" path="res://Scripts/monsterskull.gd" id="2_5qq5a"]
+
+[node name="MonsterSkull" instance=ExtResource("1_fg6eg")]
+script = ExtResource("2_5qq5a")
