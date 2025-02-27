@@ -55,5 +55,5 @@ func ShowJumpSkill():
 
 func ModulateJumpSkill():
 	$CanvasLayer/DoubleJumpSkill/TextureRect.modulate.a = 0.3
-	await get_tree().create_timer(0.4).timeout 
+	await get_tree().create_timer(0.4).timeout
 	$CanvasLayer/DoubleJumpSkill/TextureRect.modulate.a = 1

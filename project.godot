@@ -76,6 +76,7 @@ Reload={
 2d_physics/layer_5="Pickups"
 2d_physics/layer_6="Triggers"
 2d_physics/layer_7="BossPoison"
+2d_physics/layer_8="Doors"
 
 [rendering]
 
