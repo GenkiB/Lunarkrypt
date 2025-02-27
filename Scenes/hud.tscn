@@ -27,3 +27,13 @@ scale = Vector2(0.24, 0.24)
 value = 50.0
 texture_under = ExtResource("1_dt0m5")
 texture_progress = ExtResource("2_bbu4w")
+
+[node name="BulletHUDContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -139.589
+offset_right = 447.425
+offset_bottom = -99.5895
+grow_vertical = 0

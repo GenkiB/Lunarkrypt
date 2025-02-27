@@ -14,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Global.globalBulletOwner == "boss":
 		self.velocity = direction * bossBulletSpeed * delta
-	if bulletOwner == "player" or bulletOwner == "monster":
+	if bulletOwner == "player" or Global.globalBulletOwner == "monster":
 		self.velocity = direction * speed * delta
 	move_and_slide()
 	#print(bulletOwner)
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 func _on_bullet_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Monster"):
 		if bulletOwner == "player":
-			body.TakeDamage(playerBulletDamage)
+			body.TakeDamage(Global.currentWeapon.weaponDamage)
 			self.queue_free()
 	if body.is_in_group("Walls"):
 		self.queue_free()

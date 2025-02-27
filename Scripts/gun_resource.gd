@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 
 @export var weaponName:String
 @export var maxMagSize:int
