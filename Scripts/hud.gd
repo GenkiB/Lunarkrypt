@@ -44,3 +44,16 @@ func RefillHBox():
 		new_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL  # Optional: maintain proportions
 
 		hBox.add_child(new_texture)  # Add the bullet to the HBoxContainer
+
+func ModulateDashSkill():
+	$CanvasLayer/DashSkill/TextureRect.modulate.a = 0.3
+	await get_tree().create_timer(0.4).timeout 
+	$CanvasLayer/DashSkill/TextureRect.modulate.a = 1
+	
+func ShowJumpSkill():
+	$CanvasLayer/DoubleJumpSkill.visible = true
+
+func ModulateJumpSkill():
+	$CanvasLayer/DoubleJumpSkill/TextureRect.modulate.a = 0.3
+	await get_tree().create_timer(0.4).timeout 
+	$CanvasLayer/DoubleJumpSkill/TextureRect.modulate.a = 1

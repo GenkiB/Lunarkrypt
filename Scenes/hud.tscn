@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://djmpteat4mgdt"]
+[gd_scene load_steps=6 format=3 uid="uid://djmpteat4mgdt"]
 
 [ext_resource type="Texture2D" uid="uid://caxa8owx3v1oi" path="res://Assets/PlayerHPUnder.png" id="1_dt0m5"]
 [ext_resource type="Script" path="res://Scripts/hud.gd" id="1_elh2k"]
 [ext_resource type="Texture2D" uid="uid://442vxjbgk8jy" path="res://Assets/PlayerHPProgress.png" id="2_bbu4w"]
+[ext_resource type="Texture2D" uid="uid://e54m4dqei6ea" path="res://Assets/DashSkill.png" id="4_0m355"]
+[ext_resource type="Texture2D" uid="uid://c465gh3fxw601" path="res://Assets/DoubleJumpSkill.png" id="5_o4don"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -33,9 +35,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
-offset_top = -119.291
+offset_top = -154.122
 offset_right = 916.0
-offset_bottom = -79.2913
+offset_bottom = -114.121
 grow_vertical = 0
 scale = Vector2(0.468, 0.468)
 
@@ -46,3 +48,52 @@ offset_right = 244.0
 offset_bottom = 95.0
 theme_override_font_sizes/font_size = 40
 text = "Keys Label"
+
+[node name="DashSkill" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -132.284
+offset_right = 99.0
+offset_bottom = -81.2844
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/DashSkill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 453.0
+offset_bottom = 461.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_0m355")
+metadata/_edit_lock_ = true
+
+[node name="DoubleJumpSkill" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 91.2
+offset_top = -132.284
+offset_right = 150.2
+offset_bottom = -81.2844
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/DoubleJumpSkill"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 453.0
+offset_bottom = 461.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_o4don")
+metadata/_edit_lock_ = true

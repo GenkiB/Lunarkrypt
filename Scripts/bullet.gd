@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 var direction:Vector2 = Vector2(0,0)
 var speed:float = 80000
-var bossBulletSpeed = 20000
+var bossBulletSpeed = 40000
 var bulletOwner:String = ""
 var playerBulletDamage:float = 17
 var enemyBulletDamage:float = 9
-var bossBulletDamage:float = 9
+var bossBulletDamage:float = 25
 
 func _ready() -> void:
 	pass
@@ -34,4 +34,8 @@ func _on_bullet_area_body_entered(body: Node2D) -> void:
 			self.queue_free()
 			body.TakeDamage(bossBulletDamage)
 	if body.is_in_group("Bullets"):
-			queue_free()
+		var target_scale = Vector2(0, 0)
+		var tween = create_tween()
+		tween.tween_property(self, "scale", target_scale, 0.2).set_trans(Tween.TRANS_LINEAR)
+		await get_tree().create_timer(0.2).timeout
+		queue_free()

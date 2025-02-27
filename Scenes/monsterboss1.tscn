@@ -23,6 +23,9 @@ position = Vector2(3.05176e-05, -10.8)
 [node name="CollisionShape2D" parent="AggroArea" index="0"]
 metadata/_edit_lock_ = true
 
+[node name="ShootTimer" parent="." index="9"]
+wait_time = 1.0
+
 [node name="CollisionShape2D" parent="DashDetector" index="0"]
 position = Vector2(-0.6, -10.315)
 metadata/_edit_lock_ = true

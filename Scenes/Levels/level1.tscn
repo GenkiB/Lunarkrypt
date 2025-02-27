@@ -194,18 +194,23 @@ script = ExtResource("6_sjwkj")
 
 [node name="MonsterSkull" parent="." instance=ExtResource("7_i826e")]
 position = Vector2(997.319, 731.023)
+metadata/_edit_lock_ = true
 
 [node name="MonsterSkull2" parent="." instance=ExtResource("7_i826e")]
 position = Vector2(3264.13, 1292.96)
+metadata/_edit_lock_ = true
 
 [node name="MonsterBug" parent="." instance=ExtResource("8_wcrnr")]
 position = Vector2(-324.229, 1006.66)
+metadata/_edit_lock_ = true
 
 [node name="MonsterBug2" parent="." instance=ExtResource("8_wcrnr")]
 position = Vector2(2154.57, 1153.5)
+metadata/_edit_lock_ = true
 
 [node name="MonsterBoss1" parent="." instance=ExtResource("9_nym6j")]
 position = Vector2(6741.43, 1486.3)
+metadata/_edit_lock_ = true
 
 [node name="BossTrigger" type="Area2D" parent="."]
 position = Vector2(5464.24, 1377.84)

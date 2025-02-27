@@ -88,7 +88,7 @@ func _on_shoot_timer_timeout() -> void:
 	if canShoot:
 		if "Boss" in self.name:
 			Global.globalBulletOwner = "boss"
-			$ShootTimer.wait_time = 3
+			#$ShootTimer.wait_time = 3
 		else:
 			var poisonBulletTemp = poisonBulletScene.instantiate()
 			$ShootTimer.wait_time = 1.6

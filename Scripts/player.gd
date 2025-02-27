@@ -127,6 +127,8 @@ func ChangeState(newStateName:String):
 	for state in get_node("States").get_child_count():
 		if newStateName in get_node("States").get_child(state).name:
 			get_node("States").get_child(state).reset_node()
+	if currentState == "dash":
+		HUD.ModulateDashSkill()
 
 func _process(delta: float) -> void:
 	if health <= 0:
@@ -152,7 +154,10 @@ func SpawnBulletParticles():
 func TakeDamage(amount:float):
 	await get_tree().create_timer(0.1).timeout
 	$BloodParticles.emitting = true
+	$HealTimer.stop()
 	health -= amount
+	await get_tree().create_timer(2).timeout
+	$HealTimer.start()
 
 func Death():
 	pass
@@ -174,3 +179,17 @@ func RecalculateGunDirection():
 		ARSprite.scale.x = abs(ARSprite.scale.x)
 		ARSprite.position.x = 60
 		gunDirection = 1
+
+func ModulateJumpHUD():
+	HUD.ModulateJumpSkill()
+
+
+func _on_heal_timer_timeout() -> void:
+	health += 1
+	health = clampf(health, 0, 100)
+	if health >= MAX_HEALTH:
+		$HealTimer.stop()
+
+
+func _on_auto_shoot_timer_timeout() -> void:
+	pass # Replace with function body.

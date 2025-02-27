@@ -13,6 +13,8 @@ func _physics_process(delta: float) -> void:
 		elif Input.is_action_pressed("MoveLeft"):
 			player.velocity.x = max(player.velocity.x - player.acceleration * delta, -player.maxSpeed * delta)
 		if Input.is_action_just_pressed("Jump") and (player.jumpCount < player.maxJumps) and Skills.hasUnlockedDoubleJump and !player.is_on_floor() and !player.isFalling:
+			player.ModulateJumpHUD()
+			#need HUD Here somehow
 			player.jumpCount += 1
 			player.velocity.y = -player.doubleJumpHeight * delta
 			player.ChangeState("jump")

@@ -171,3 +171,8 @@ scale_amount_curve = SubResource("Curve_jq0ns")
 visible = false
 position_smoothing_enabled = true
 position_smoothing_speed = 12.0
+
+[node name="HealTimer" type="Timer" parent="."]
+wait_time = 0.25
+
+[connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]
