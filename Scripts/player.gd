@@ -191,3 +191,6 @@ func _on_heal_timer_timeout() -> void:
 	health = clampf(health, 0, 100)
 	if health >= MAX_HEALTH:
 		$HealTimer.stop()
+
+func HideJumpUI():
+	tutorialUI.visible = false

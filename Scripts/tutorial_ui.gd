@@ -8,3 +8,6 @@ func SetTextReloadTip():
 
 func SetTextBossWarning():
 	$TutorialUI/Control/TipLabel.text = "Tough fight ahead! Use Dash to overcome your foe.\nTry shooting the poison to defend yourself."
+
+func SetTextDoubleJump():
+	$TutorialUI/Control/TipLabel.text = "You have obtained the Double Jump Skill!\nPress Spacebar in quick succession to reach new heights."
