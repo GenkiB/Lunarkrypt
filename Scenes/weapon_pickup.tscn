@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmfwb3pxaqnxj"]
+
+[ext_resource type="Texture2D" uid="uid://i5rryx2rmx47" path="res://Assets/Weapons and Items.png" id="1_61n5l"]
+[ext_resource type="Script" path="res://Scripts/weapon_pickup.gd" id="1_frfgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aedr2"]
+size = Vector2(120.67, 86.795)
+
+[node name="WeaponPickup" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_frfgb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_aedr2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_61n5l")
+region_enabled = true
+region_rect = Rect2(274.675, 218.747, 106.024, 55.9038)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -31,7 +31,7 @@ func UseBullet():
 func ClearHBox():
 	for bullet in hBox.get_children():
 		bullet.queue_free()  # Remove and free the existing bullet nodes
-	RefillHBox()
+	#RefillHBox()
 
 func RefillHBox():
 	for i in range(Global.magSize):

@@ -33,7 +33,16 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
-offset_top = -139.589
-offset_right = 447.425
-offset_bottom = -99.5895
+offset_top = -119.291
+offset_right = 916.0
+offset_bottom = -79.2913
 grow_vertical = 0
+scale = Vector2(0.468, 0.468)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 244.0
+offset_bottom = 95.0
+theme_override_font_sizes/font_size = 40
+text = "Keys Label"

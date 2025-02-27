@@ -117,6 +117,7 @@ script = ExtResource("6_gpoqi")
 script = ExtResource("7_pmo78")
 
 [node name="GunPistol" type="Sprite2D" parent="."]
+visible = false
 z_index = 5
 position = Vector2(127.5, -37.5)
 scale = Vector2(1.425, 1.425)

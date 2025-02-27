@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkp2v5bnxb73o"]
+
+[ext_resource type="PackedScene" uid="uid://bmfwb3pxaqnxj" path="res://Scenes/weapon_pickup.tscn" id="1_ocaw2"]
+
+[node name="AssaultRiflePickup" instance=ExtResource("1_ocaw2")]

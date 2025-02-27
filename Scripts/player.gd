@@ -13,7 +13,7 @@ var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var friction:float = 0.2
 var weight:float = 0.6
 var isFalling:bool = false
-var gunDirection
+var gunDirection:int
 var gunPositionX:float = 50
 var dashDamage:float = 75
 
@@ -24,8 +24,10 @@ var maxJumps:int = 2
 var jumpCount = 0
 
 @onready var anim:AnimatedSprite2D = get_node("AnimatedSprite2D")
-@onready var gunSprite:Sprite2D = get_node("Gun")
-@onready var bulletSpawn = get_node("Gun/BulletSpawn")
+@onready var pistolSprite:Sprite2D = get_node("GunPistol")
+@onready var ARSprite:Sprite2D = get_node("GunAssaultRifle")
+@onready var pistolBulletSpawn = get_node("GunPistol/PistolBulletSpawn")
+@onready var ARBulletSpawn = get_node("GunAssaultRifle/AssaultBulletSpawn")
 @onready var bulletScene:PackedScene = preload("res://Scenes/bullet.tscn")
 @onready var HUD:Control = get_parent().get_node("HUD")
 
@@ -33,21 +35,46 @@ func _ready() -> void:
 	health = MAX_HEALTH
 	ChangeState("idle")
 	gunDirection = 1
-	gunPositionX = gunSprite.position.x
+	gunPositionX = SetDisplayedWeapon()
+	
 
 func _physics_process(delta: float) -> void:
 	
 	direction = Input.get_axis("MoveLeft", "MoveRight")
 	
-	if direction < 0 and gunDirection != -1:
-		gunDirection = -1
-		gunSprite.scale.x = -abs(gunSprite.scale.x) # Ensure consistent negative scale
-		gunSprite.position.x = gunPositionX - 50
+	if Global.currentWeapon.weaponName == "Pistol":
+		
+		$GunPistol.visible = true
+		$GunAssaultRifle.visible = false
+	
+		if direction < 0 and gunDirection != -1:
+			gunDirection = -1
+			pistolSprite.scale.x = -abs(pistolSprite.scale.x) # Ensure consistent negative scale
+			pistolSprite.position.x = gunPositionX - 280
 
-	elif direction > 0 and gunDirection != 1:
-		gunDirection = 1
-		gunSprite.scale.x = abs(gunSprite.scale.x) # Ensure consistent positive scale
-		gunSprite.position.x = gunPositionX
+		elif direction > 0 and gunDirection != 1:
+			gunDirection = 1
+			pistolSprite.scale.x = abs(pistolSprite.scale.x) # Ensure consistent positive scale
+			pistolSprite.position.x = gunPositionX + 10
+			
+	if Global.currentWeapon.weaponName == "AssaultRifle":
+		
+		$GunPistol.visible = false
+		$GunAssaultRifle.visible = true
+		
+		if direction < 0 and gunDirection != -1:
+			
+			gunDirection = -1
+			ARSprite.scale.x = -abs(ARSprite.scale.x) # Ensure consistent negative scale
+			ARSprite.position.x = -40
+			RecalculateGunDirection()
+
+		elif direction > 0 and gunDirection != 1:
+			
+			gunDirection = 1
+			ARSprite.scale.x = abs(ARSprite.scale.x) # Ensure consistent positive scale
+			ARSprite.position.x = 60
+			RecalculateGunDirection()
 		
 		
 	if direction < 0:
@@ -55,6 +82,9 @@ func _physics_process(delta: float) -> void:
 		
 	elif direction > 0:
 		anim.flip_h = false
+		
+	#print(anim.flip_h)
+	#print("Gun Direction " + str(gunDirection))
 		
 
 	# Add the gravity.
@@ -73,8 +103,12 @@ func _physics_process(delta: float) -> void:
 			HUD.UseBullet()
 			SpawnBulletParticles()
 			var bulletTemp = bulletScene.instantiate()
-			bulletTemp.position = bulletSpawn.global_position
-			bulletTemp.direction = (get_global_mouse_position() - bulletSpawn.global_position).normalized()
+			if Global.currentWeapon.weaponName == "Pistol":
+				bulletTemp.position = pistolBulletSpawn.global_position
+				bulletTemp.direction = (get_global_mouse_position() - pistolBulletSpawn.global_position).normalized()
+			if Global.currentWeapon.weaponName == "AssaultRifle":
+				bulletTemp.position = ARBulletSpawn.global_position
+				bulletTemp.direction = (get_global_mouse_position() - ARBulletSpawn.global_position).normalized()
 			bulletTemp.bulletOwner = "player"
 			get_node("../BulletContainer").add_child(bulletTemp)
 			Global.bulletsInMag -= 1
@@ -83,6 +117,8 @@ func _physics_process(delta: float) -> void:
 		if Global.bulletsInMag < Global.magSize:
 			Global.bulletsInMag = Global.magSize
 			HUD.ClearHBox()
+			HUD.RefillHBox()
+			
 
 	move_and_slide()
 
@@ -108,7 +144,10 @@ func CanShoot(mouse_pos: Vector2) -> bool:
 	return dot > 0 and angle < max_angle
 
 func SpawnBulletParticles():
-	$Gun/BulletSpawn/CPUParticles2D.emitting = true
+	if Global.currentWeapon.weaponName == "Pistol":
+		$GunPistol/PistolBulletSpawn/CPUParticles2D.emitting = true
+	if Global.currentWeapon.weaponName == "AssaultRifle":
+		$GunAssaultRifle/AssaultBulletSpawn/CPUParticles2D.emitting = true
 	
 func TakeDamage(amount:float):
 	await get_tree().create_timer(0.1).timeout
@@ -117,3 +156,21 @@ func TakeDamage(amount:float):
 
 func Death():
 	pass
+
+func SetDisplayedWeapon() -> float:
+	if Global.currentWeapon.weaponName == "Pistol":
+		return pistolSprite.position.x
+	if Global.currentWeapon.weaponName == "AssaultRifle":
+		return ARSprite.position.x
+	else:
+		return 0
+
+func RecalculateGunDirection():
+	if anim.flip_h:
+		ARSprite.scale.x = -abs(ARSprite.scale.x)
+		ARSprite.position.x = -40
+		gunDirection = -1
+	else:
+		ARSprite.scale.x = abs(ARSprite.scale.x)
+		ARSprite.position.x = 60
+		gunDirection = 1

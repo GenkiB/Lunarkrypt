@@ -9,6 +9,6 @@ var weapons:Dictionary = {
 }
 
 var currentWeapon:Resource = weapons["Pistol"]
-var magSize:int = 20
+var magSize:int = 10
 var bulletsInMag:int = 10
 var money:int = 10
