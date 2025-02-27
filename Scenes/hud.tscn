@@ -41,7 +41,8 @@ offset_bottom = -114.121
 grow_vertical = 0
 scale = Vector2(0.468, 0.468)
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="KeysLabel" type="Label" parent="CanvasLayer"]
+visible = false
 offset_left = 40.0
 offset_top = 40.0
 offset_right = 244.0

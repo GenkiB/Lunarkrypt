@@ -4,6 +4,7 @@ extends Node
 @onready var HUD:Control = get_node("HUD")
 @onready var weapon:Resource = preload("res://Scenes/Weapon Resources/AssaultRifle.tres")
 @onready var player:Node = get_node("Player")
+@onready var tutorialUI = get_node("TutorialUI2")
 
 func _ready() -> void:
 	$Player.position = playerStart.global_position
@@ -16,3 +17,9 @@ func _ready() -> void:
 	Global.magSize = Global.currentWeapon.magSize
 	HUD.ClearHBox()
 	HUD.UpdateBulletDisplay()
+
+func ShowTutorialUI():
+	tutorialUI.visible = true
+
+func HideTutorialUI():
+	tutorialUI.visible = false

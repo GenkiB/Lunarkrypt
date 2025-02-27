@@ -30,6 +30,10 @@ var jumpCount = 0
 @onready var ARBulletSpawn = get_node("GunAssaultRifle/AssaultBulletSpawn")
 @onready var bulletScene:PackedScene = preload("res://Scenes/bullet.tscn")
 @onready var HUD:Control = get_parent().get_node("HUD")
+@onready var level = get_tree().current_scene
+@onready var tutorialUI = get_parent().get_node("TutorialUI")
+
+var hasShownReloadTip = false
 
 func _ready() -> void:
 	health = MAX_HEALTH
@@ -110,6 +114,13 @@ func _physics_process(delta: float) -> void:
 			Global.bulletsInMag = Global.magSize
 			HUD.ClearHBox()
 			HUD.RefillHBox()
+		if hasShownReloadTip:
+			level.HideTutorialUI()
+			
+	if Global.bulletsInMag <= 0 and !hasShownReloadTip and get_tree().get_current_scene().name == "level1":
+		level.ShowTutorialUI()
+		tutorialUI.SetTextReloadTip()
+		hasShownReloadTip = true
 			
 	move_and_slide()
 
@@ -119,6 +130,7 @@ func ChangeState(newStateName:String):
 		if newStateName in get_node("States").get_child(state).name:
 			get_node("States").get_child(state).reset_node()
 	if currentState == "dash":
+		tutorialUI.visible = false
 		HUD.ModulateDashSkill()
 
 func _process(delta: float) -> void:

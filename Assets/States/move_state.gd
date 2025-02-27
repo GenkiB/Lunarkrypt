@@ -2,6 +2,7 @@ extends Node
 class_name move_state
 
 @onready var player: Node = get_parent().get_parent()
+@onready var level: Node = get_tree().current_scene
 
 func reset_node() -> void:
 	player.anim.play("Move")
@@ -21,6 +22,7 @@ func _physics_process(delta: float) -> void:
 			player.velocity.y = -player.jumpHeight * delta
 			player.ChangeState("jump")
 		if Input.is_action_just_pressed("Dash") and player.canDash and Skills.hasUnlockedDash:
+			level.HideTutorialUI()
 			player.ChangeState("dash")
 
 func exit() -> void:

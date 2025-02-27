@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bg5wktugvcw2n"]
+[gd_scene load_steps=20 format=4 uid="uid://bg5wktugvcw2n"]
 
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_82jb8"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="1_bq4wr"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://djmpteat4mgdt" path="res://Scenes/hud.tscn" id="11_lxtlb"]
 [ext_resource type="PackedScene" uid="uid://bmfwb3pxaqnxj" path="res://Scenes/weapon_pickup.tscn" id="12_tppey"]
 [ext_resource type="PackedScene" uid="uid://c2gufcmqvt2nj" path="res://Scenes/door.tscn" id="13_sfevm"]
+[ext_resource type="PackedScene" uid="uid://der6obndl464u" path="res://Scenes/tutorial_ui.tscn" id="14_eylkp"]
 [ext_resource type="Texture2D" uid="uid://b2l8ocjqkfmml" path="res://Assets/97.png" id="14_u04g6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j47rm"]
@@ -164,6 +165,9 @@ sources/1 = SubResource("TileSetAtlasSource_j47rm")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei6j1"]
 size = Vector2(600, 309.72)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7k5s"]
+size = Vector2(100, 100)
+
 [node name="Level1" type="Node"]
 script = ExtResource("1_82jb8")
 
@@ -183,7 +187,7 @@ tile_map_data = PackedByteArray("AAABAAAAAQACAAAAADAAAAEAAQACAAAAAFAAAAIAAQACAAA
 
 [node name="TileMapLayerMisc" parent="." instance=ExtResource("2_o5bk2")]
 modulate = Color(0.5, 0.5, 0.5, 1)
-tile_map_data = PackedByteArray("AAD3/w4AAQAAAAMAAAD4/w4AAQAAAAMAAAD3/w0AAQAAAAMAAAAaAAEAAQAMAAIAAAAvAAIAAQAJAAMAADAwAAIAAQAJAAMAADAxAAIAAQAJAAMAADAyAAIAAQAJAAMAADAzAAIAAQAJAAMAADA0AAIAAQAJAAMAADA1AAIAAQAJAAMAADAlAAEAAQAJAAMAADAmAAEAAQAJAAMAADAnAAEAAQAJAAMAADAoAAEAAQAJAAMAADApAAEAAQAJAAMAADA6AAkAAQAJAAQAAAA7AAkAAQAJAAQAAAA8AAkAAQAJAAQAAAA9AAkAAQAJAAQAAAA+AAkAAQAJAAQAAAA/AAkAAQAJAAQAAABAAAkAAQAJAAQAAABBAAkAAQAJAAQAAABCAAkAAQAJAAQAAABDAAkAAQAJAAQAAABEAAkAAQAJAAQAAABFAAkAAQAJAAQAAABGAAkAAQAJAAQAAABHAAkAAQAJAAQAAABIAAkAAQAJAAQAAABJAAgAAQAJAAQAAGBJAAcAAQAJAAQAAGBJAAYAAQAJAAQAAGBJAAUAAQAJAAQAAGBJAAQAAQAJAAQAAABKAAQAAQAJAAQAAABLAAQAAQAJAAQAAABMAAQAAQAJAAQAAABNAAQAAQAJAAQAAABOAAQAAQAJAAQAAABPAAQAAQAJAAQAAABQAAQAAQAJAAQAAABRAAQAAQAJAAQAAABSAAQAAQAJAAQAAABTAAQAAQAJAAQAAABUAAQAAQAJAAQAAABVAAQAAQAJAAQAAABWAAQAAQAJAAQAAABXAAQAAQAJAAQAAABYAAQAAQAJAAQAAABZAAQAAQAJAAQAAABaAAQAAQAJAAQAAABbAAQAAQAJAAQAAABcAAQAAQAJAAQAAABdAAQAAQAJAAQAAABeAAQAAQAJAAQAAABfAAQAAQAJAAQAAABgAAQAAQAJAAQAAABhAAQAAQAJAAQAAABiAAQAAQAJAAQAAABjAAQAAQAJAAQAAABkAAQAAQAJAAQAAABlAAQAAQAJAAQAAABmAAQAAQAJAAQAAABIABIAAQABAAMAAABHABIAAQABAAMAAABGABIAAQAKAAUAAAAjAA0AAQANAAUAAAAVAAYAAQANAAUAAAA=")
+tile_map_data = PackedByteArray("AAD3/w4AAQAAAAMAAAD4/w4AAQAAAAMAAAD3/w0AAQAAAAMAAAAaAAEAAQAMAAIAAAAvAAIAAQAJAAMAADAwAAIAAQAJAAMAADAxAAIAAQAJAAMAADAyAAIAAQAJAAMAADAzAAIAAQAJAAMAADA0AAIAAQAJAAMAADA1AAIAAQAJAAMAADAlAAEAAQAJAAMAADAmAAEAAQAJAAMAADAnAAEAAQAJAAMAADAoAAEAAQAJAAMAADApAAEAAQAJAAMAADA6AAkAAQAJAAQAAAA7AAkAAQAJAAQAAAA8AAkAAQAJAAQAAAA9AAkAAQAJAAQAAAA+AAkAAQAJAAQAAAA/AAkAAQAJAAQAAABAAAkAAQAJAAQAAABBAAkAAQAJAAQAAABCAAkAAQAJAAQAAABDAAkAAQAJAAQAAABEAAkAAQAJAAQAAABFAAkAAQAJAAQAAABGAAkAAQAJAAQAAABHAAkAAQAJAAQAAABIAAkAAQAJAAQAAABJAAgAAQAJAAQAAGBJAAcAAQAJAAQAAGBJAAYAAQAJAAQAAGBJAAUAAQAJAAQAAGBJAAQAAQAJAAQAAABKAAQAAQAJAAQAAABLAAQAAQAJAAQAAABMAAQAAQAJAAQAAABNAAQAAQAJAAQAAABOAAQAAQAJAAQAAABPAAQAAQAJAAQAAABQAAQAAQAJAAQAAABRAAQAAQAJAAQAAABSAAQAAQAJAAQAAABTAAQAAQAJAAQAAABUAAQAAQAJAAQAAABVAAQAAQAJAAQAAABWAAQAAQAJAAQAAABXAAQAAQAJAAQAAABYAAQAAQAJAAQAAABZAAQAAQAJAAQAAABaAAQAAQAJAAQAAABbAAQAAQAJAAQAAABcAAQAAQAJAAQAAABdAAQAAQAJAAQAAABeAAQAAQAJAAQAAABfAAQAAQAJAAQAAABgAAQAAQAJAAQAAABhAAQAAQAJAAQAAABiAAQAAQAJAAQAAABjAAQAAQAJAAQAAABkAAQAAQAJAAQAAABlAAQAAQAJAAQAAABmAAQAAQAJAAQAAAAjAA0AAQANAAUAAAAVAAYAAQANAAUAAABGABIAAQABAAMAAABEABIAAQAKAAUAAABFABIAAQABAAMAAAA=")
 tile_set = SubResource("TileSet_8jbop")
 
 [node name="Doublejumppickup" parent="." instance=ExtResource("5_ac1gl")]
@@ -231,13 +235,7 @@ shape = SubResource("RectangleShape2D_ei6j1")
 [node name="WeaponPickup" parent="." instance=ExtResource("12_tppey")]
 position = Vector2(3523.16, 439.828)
 
-[node name="TutorialUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="TutorialUI"]
+[node name="TutorialUI" parent="." instance=ExtResource("14_eylkp")]
 
 [node name="PlayerStart" type="Node2D" parent="."]
 position = Vector2(160, 367.482)
@@ -257,5 +255,16 @@ pivot_offset = Vector2(256, 236)
 texture = ExtResource("14_u04g6")
 metadata/_edit_lock_ = true
 
+[node name="BossWarningTrigger" type="Area2D" parent="."]
+position = Vector2(4708, 1184)
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossWarningTrigger"]
+position = Vector2(86.2671, 97.5808)
+shape = SubResource("RectangleShape2D_e7k5s")
+
 [connection signal="body_entered" from="Doublejumppickup" to="Doublejumppickup" method="_on_body_entered"]
 [connection signal="body_entered" from="BossTrigger" to="MonsterBoss1" method="_on_boss_trigger_body_entered"]
+[connection signal="body_entered" from="BossWarningTrigger" to="." method="_on_boss_warning_trigger_body_entered"]
+[connection signal="body_exited" from="BossWarningTrigger" to="." method="_on_boss_warning_trigger_body_exited"]

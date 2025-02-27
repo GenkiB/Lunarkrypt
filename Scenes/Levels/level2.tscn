@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bwqj6ke3f1ddw"]
+[gd_scene load_steps=19 format=4 uid="uid://bwqj6ke3f1ddw"]
 
 [ext_resource type="Script" path="res://Scripts/level_2.gd" id="1_wkoyj"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="2_0alsu"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://djmpteat4mgdt" path="res://Scenes/hud.tscn" id="12_xk2gg"]
 [ext_resource type="PackedScene" uid="uid://bmfwb3pxaqnxj" path="res://Scenes/weapon_pickup.tscn" id="13_f3bui"]
 [ext_resource type="Texture2D" uid="uid://duep0txgwg72n" path="res://Assets/EnemyHPProgress.png" id="14_rre4t"]
+[ext_resource type="PackedScene" uid="uid://der6obndl464u" path="res://Scenes/tutorial_ui.tscn" id="15_1rvdi"]
 [ext_resource type="Texture2D" uid="uid://b2l8ocjqkfmml" path="res://Assets/97.png" id="15_ax35x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j47rm"]
@@ -257,6 +258,8 @@ scale = Vector2(0.15, 0.15)
 pivot_offset = Vector2(256, 236)
 texture = ExtResource("15_ax35x")
 metadata/_edit_lock_ = true
+
+[node name="TutorialUI2" parent="." instance=ExtResource("15_1rvdi")]
 
 [connection signal="body_entered" from="Doublejumppickup" to="Doublejumppickup" method="_on_body_entered"]
 [connection signal="body_entered" from="BossTrigger" to="MonsterBoss1" method="_on_boss_trigger_body_entered"]

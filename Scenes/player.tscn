@@ -168,7 +168,7 @@ scale_amount_max = 0.01
 scale_amount_curve = SubResource("Curve_jq0ns")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
+position = Vector2(0, -200)
 position_smoothing_enabled = true
 position_smoothing_speed = 12.0
 
