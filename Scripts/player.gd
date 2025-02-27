@@ -37,7 +37,6 @@ func _ready() -> void:
 	gunDirection = 1
 	gunPositionX = SetDisplayedWeapon()
 	
-
 func _physics_process(delta: float) -> void:
 	
 	direction = Input.get_axis("MoveLeft", "MoveRight")
@@ -76,28 +75,21 @@ func _physics_process(delta: float) -> void:
 			ARSprite.position.x = 60
 			RecalculateGunDirection()
 		
-		
 	if direction < 0:
 		anim.flip_h = true
 		
 	elif direction > 0:
 		anim.flip_h = false
 		
-	#print(anim.flip_h)
-	#print("Gun Direction " + str(gunDirection))
-		
-
-	# Add the gravity.
+	# Gravity
 	if not is_on_floor():
 		var targetVel:float = min(velocity.y + acceleration * delta, maxSpeed * delta) 
 		velocity.y = lerp(velocity.y, targetVel, weight)
 		if velocity.y > 0: isFalling = true
 	else:
 		if velocity.y == 0: isFalling = false
-		
-		
-		
-	#Check for shooting
+
+	#Shooting
 	if Input.is_action_just_pressed("Shoot"):
 		if CanShoot(get_global_mouse_position()) and Global.bulletsInMag > 0:
 			HUD.UseBullet()
@@ -119,7 +111,6 @@ func _physics_process(delta: float) -> void:
 			HUD.ClearHBox()
 			HUD.RefillHBox()
 			
-
 	move_and_slide()
 
 func ChangeState(newStateName:String):
@@ -183,13 +174,8 @@ func RecalculateGunDirection():
 func ModulateJumpHUD():
 	HUD.ModulateJumpSkill()
 
-
 func _on_heal_timer_timeout() -> void:
 	health += 1
 	health = clampf(health, 0, 100)
 	if health >= MAX_HEALTH:
 		$HealTimer.stop()
-
-
-func _on_auto_shoot_timer_timeout() -> void:
-	pass # Replace with function body.

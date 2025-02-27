@@ -3,7 +3,6 @@ class_name move_state
 
 @onready var player: Node = get_parent().get_parent()
 
-
 func reset_node() -> void:
 	player.anim.play("Move")
 

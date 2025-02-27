@@ -48,19 +48,12 @@ func _physics_process(delta: float) -> void:
 	rayShoot.look_at(get_node("../Player").global_position)
 	if rayShoot.is_colliding():
 		pass
-		#canShoot = false
 
 	move_and_slide()
 
-		
 func TakeDamage(amount:int):
 	$BloodParticles.emitting = true
 	health -= amount
-
-
-func _on_head_damage_body_entered(body: Node2D) -> void:
-	pass
-
 
 func _on_damage_player_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and not "dash" in body.currentState:
@@ -71,12 +64,10 @@ func _on_damage_player_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		$MeleeAttackTimer.stop()
 
-
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		canShoot = true
 		$ShootTimer.start()
-
 
 func _on_aggro_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -88,7 +79,6 @@ func _on_shoot_timer_timeout() -> void:
 	if canShoot:
 		if "Boss" in self.name:
 			Global.globalBulletOwner = "boss"
-			#$ShootTimer.wait_time = 3
 		else:
 			var poisonBulletTemp = poisonBulletScene.instantiate()
 			$ShootTimer.wait_time = 1.6
@@ -104,19 +94,11 @@ func _on_dash_detector_body_entered(body: Node2D) -> void:
 			DisableCollisionWithPlayer()
 			$DisableCollisionTimer.start()
 
-
-func _on_dash_detector_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		pass
-
-
 func _on_melee_attack_timer_timeout() -> void:
 	player.TakeDamage(collisionDamageAmount)
 
 func DisableCollisionWithPlayer():
 	add_collision_exception_with(player)
-	#await get_tree().create_timer(2.5).timeout
-	
-	
+
 func _on_disable_collision_timer_timeout() -> void:
 	remove_collision_exception_with(player)

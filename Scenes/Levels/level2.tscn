@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bwqj6ke3f1ddw"]
+[gd_scene load_steps=18 format=4 uid="uid://bwqj6ke3f1ddw"]
 
 [ext_resource type="Script" path="res://Scripts/level_2.gd" id="1_wkoyj"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="2_0alsu"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dhv2iupu3566a" path="res://Scenes/monsterskull.tscn" id="8_noxe4"]
 [ext_resource type="PackedScene" uid="uid://dx865o7n46ush" path="res://Scenes/monsterbug.tscn" id="9_f2vqo"]
 [ext_resource type="PackedScene" uid="uid://cpwqyq3hl2leu" path="res://Scenes/monsterboss1.tscn" id="10_q5wja"]
-[ext_resource type="PackedScene" uid="uid://c2gufcmqvt2nj" path="res://Scenes/door.tscn" id="11_r7ds0"]
 [ext_resource type="PackedScene" uid="uid://djmpteat4mgdt" path="res://Scenes/hud.tscn" id="12_xk2gg"]
 [ext_resource type="PackedScene" uid="uid://bmfwb3pxaqnxj" path="res://Scenes/weapon_pickup.tscn" id="13_f3bui"]
 [ext_resource type="Texture2D" uid="uid://duep0txgwg72n" path="res://Assets/EnemyHPProgress.png" id="14_rre4t"]
@@ -214,9 +213,6 @@ metadata/_edit_lock_ = true
 [node name="MonsterBoss1" parent="." instance=ExtResource("10_q5wja")]
 position = Vector2(6741.43, 1486.3)
 metadata/_edit_lock_ = true
-
-[node name="Door" parent="." instance=ExtResource("11_r7ds0")]
-position = Vector2(693.076, -1486.24)
 
 [node name="BossTrigger" type="Area2D" parent="."]
 position = Vector2(5464.24, 1377.84)
