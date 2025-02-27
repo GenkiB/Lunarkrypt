@@ -27,6 +27,7 @@ var jumpCount = 0
 @onready var gunSprite:Sprite2D = get_node("Gun")
 @onready var bulletSpawn = get_node("Gun/BulletSpawn")
 @onready var bulletScene:PackedScene = preload("res://Scenes/bullet.tscn")
+@onready var HUD:Control = get_parent().get_node("HUD")
 
 func _ready() -> void:
 	health = MAX_HEALTH
@@ -69,6 +70,7 @@ func _physics_process(delta: float) -> void:
 	#Check for shooting
 	if Input.is_action_just_pressed("Shoot"):
 		if CanShoot(get_global_mouse_position()) and Global.bulletsInMag > 0:
+			HUD.UseBullet()
 			SpawnBulletParticles()
 			var bulletTemp = bulletScene.instantiate()
 			bulletTemp.position = bulletSpawn.global_position
@@ -80,6 +82,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Reload"):
 		if Global.bulletsInMag < Global.magSize:
 			Global.bulletsInMag = Global.magSize
+			HUD.ClearHBox()
 
 	move_and_slide()
 
