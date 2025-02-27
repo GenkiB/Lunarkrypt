@@ -36,6 +36,6 @@ func _on_bullet_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Bullets"):
 		var target_scale = Vector2(0, 0)
 		var tween = create_tween()
-		tween.tween_property(self, "scale", target_scale, 0.2).set_trans(Tween.TRANS_LINEAR)
-		await get_tree().create_timer(0.2).timeout
+		tween.tween_property(self, "scale", target_scale, 0.1).set_trans(Tween.TRANS_LINEAR)
+		await get_tree().create_timer(0.15).timeout
 		queue_free()
