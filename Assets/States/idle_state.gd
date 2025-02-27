@@ -21,7 +21,6 @@ func _physics_process(delta: float) -> void:
 			
 		player.velocity.x = lerp(player.velocity.x, 0.0, player.friction)
 		if Input.is_action_just_pressed("Dash") and player.canDash and player.is_on_floor():
-			print("idle dash")
 			player.ChangeState("dash")
 
 func exit() -> void:

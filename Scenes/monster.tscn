@@ -17,8 +17,8 @@ size = Vector2(85.525, 76.61)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5nfe"]
 size = Vector2(114.4, 97.92)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o58n3"]
-radius = 194.812
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyell"]
+size = Vector2(700, 125)
 
 [node name="Monster" type="CharacterBody2D" groups=["Monster"]]
 collision_layer = 4
@@ -63,6 +63,8 @@ collision_mask = 256
 
 [node name="ShootCheck" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
+collision_mask = 0
+collide_with_bodies = false
 
 [node name="HeadDamage" type="Area2D" parent="."]
 collision_layer = 0
@@ -84,9 +86,11 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroArea"]
-shape = SubResource("CircleShape2D_o58n3")
+position = Vector2(1, -24)
+shape = SubResource("RectangleShape2D_dyell")
 
 [node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.6
 
 [node name="DashDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -115,6 +119,9 @@ value = 50.0
 texture_under = ExtResource("3_gikbv")
 texture_progress = ExtResource("4_347yi")
 
+[node name="DisableCollisionTimer" type="Timer" parent="."]
+wait_time = 2.5
+
 [connection signal="body_entered" from="HeadDamage" to="." method="_on_head_damage_body_entered"]
 [connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]
 [connection signal="body_exited" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_exited"]
@@ -124,3 +131,4 @@ texture_progress = ExtResource("4_347yi")
 [connection signal="body_entered" from="DashDetector" to="." method="_on_dash_detector_body_entered"]
 [connection signal="body_exited" from="DashDetector" to="." method="_on_dash_detector_body_exited"]
 [connection signal="timeout" from="MeleeAttackTimer" to="." method="_on_melee_attack_timer_timeout"]
+[connection signal="timeout" from="DisableCollisionTimer" to="." method="_on_disable_collision_timer_timeout"]

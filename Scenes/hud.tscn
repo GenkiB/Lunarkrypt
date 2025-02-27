@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://djmpteat4mgdt"]
+
+[ext_resource type="Texture2D" uid="uid://caxa8owx3v1oi" path="res://Assets/PlayerHPUnder.png" id="1_dt0m5"]
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_elh2k"]
+[ext_resource type="Texture2D" uid="uid://442vxjbgk8jy" path="res://Assets/PlayerHPProgress.png" id="2_bbu4w"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_elh2k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HPBar" type="TextureProgressBar" parent="CanvasLayer"]
+z_index = 5
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -77.1285
+offset_right = 1742.0
+offset_bottom = 86.8715
+grow_vertical = 0
+scale = Vector2(0.24, 0.24)
+value = 50.0
+texture_under = ExtResource("1_dt0m5")
+texture_progress = ExtResource("2_bbu4w")

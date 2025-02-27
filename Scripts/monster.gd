@@ -20,7 +20,7 @@ var isBeingPushed = false
 var isTriggered = true
 
 func _ready() -> void:
-	pass
+	$HealthBar.max_value = maxHealth
 	
 func _process(delta: float) -> void:
 	$HealthBar.value = health
@@ -47,7 +47,8 @@ func _physics_process(delta: float) -> void:
 		
 	rayShoot.look_at(get_node("../Player").global_position)
 	if rayShoot.is_colliding():
-		canShoot = false
+		pass
+		#canShoot = false
 
 	move_and_slide()
 
@@ -74,27 +75,34 @@ func _on_damage_player_area_body_exited(body: Node2D) -> void:
 func _on_aggro_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		canShoot = true
+		$ShootTimer.start()
 
 
 func _on_aggro_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
+		pass
 		canShoot = false
-
+		$ShootTimer.stop()
 
 func _on_shoot_timer_timeout() -> void:
 	if canShoot:
-		var poisonBulletTemp = poisonBulletScene.instantiate()
-		poisonBulletTemp.position = self.global_position
-		poisonBulletTemp.direction = (get_parent().get_node("Player").global_position - self.global_position).normalized()
-		poisonBulletTemp.bulletOwner = "Monster"
-		get_parent().get_node("BulletContainer").add_child(poisonBulletTemp)
-
-
+		if "Boss" in self.name:
+			Global.globalBulletOwner = "boss"
+			$ShootTimer.wait_time = 3
+		else:
+			var poisonBulletTemp = poisonBulletScene.instantiate()
+			$ShootTimer.wait_time = 1.6
+			Global.globalBulletOwner = "monster"
+			poisonBulletTemp.position = self.global_position
+			poisonBulletTemp.direction = (get_parent().get_node("Player").global_position - self.global_position).normalized()
+			get_parent().get_node("BulletContainer").add_child(poisonBulletTemp)
+		
 func _on_dash_detector_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if "dash" in body.currentState:
 			TakeDamage(body.dashDamage)
 			DisableCollisionWithPlayer()
+			$DisableCollisionTimer.start()
 
 
 func _on_dash_detector_body_exited(body: Node2D) -> void:
@@ -107,6 +115,8 @@ func _on_melee_attack_timer_timeout() -> void:
 
 func DisableCollisionWithPlayer():
 	add_collision_exception_with(player)
-	await get_tree().create_timer(1.5).timeout
-	remove_collision_exception_with(player)
+	#await get_tree().create_timer(2.5).timeout
 	
+	
+func _on_disable_collision_timer_timeout() -> void:
+	remove_collision_exception_with(player)

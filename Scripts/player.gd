@@ -68,13 +68,18 @@ func _physics_process(delta: float) -> void:
 		
 	#Check for shooting
 	if Input.is_action_just_pressed("Shoot"):
-		if CanShoot(get_global_mouse_position()):
+		if CanShoot(get_global_mouse_position()) and Global.bulletsInMag > 0:
 			SpawnBulletParticles()
 			var bulletTemp = bulletScene.instantiate()
 			bulletTemp.position = bulletSpawn.global_position
 			bulletTemp.direction = (get_global_mouse_position() - bulletSpawn.global_position).normalized()
 			bulletTemp.bulletOwner = "player"
 			get_node("../BulletContainer").add_child(bulletTemp)
+			Global.bulletsInMag -= 1
+			
+	if Input.is_action_just_pressed("Reload"):
+		if Global.bulletsInMag < Global.magSize:
+			Global.bulletsInMag = Global.magSize
 
 	move_and_slide()
 
@@ -103,9 +108,9 @@ func SpawnBulletParticles():
 	$Gun/BulletSpawn/CPUParticles2D.emitting = true
 	
 func TakeDamage(amount:float):
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.1).timeout
 	$BloodParticles.emitting = true
 	health -= amount
 
 func Death():
-	print("You are dead")
+	pass

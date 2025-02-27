@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://huaojxoji7yb"]
+
+[ext_resource type="Script" path="res://Scripts/gun_resource.gd" id="1_6j4yh"]
+
+[resource]
+script = ExtResource("1_6j4yh")
+weaponName = "AssaultRifle"
+maxMagSize = 20
+weaponDamage = 10
