@@ -2,11 +2,10 @@ extends Control
 
 @onready var player:Node = get_parent().get_node("Player")
 @onready var hBox = $CanvasLayer/BulletHUDContainer
-#@onready var HUDbulletsInMag:int = 0
 
 func _ready() -> void:
 	UpdateBulletDisplay()
-	
+	UpdateLivesDisplay()
 	
 
 func _process(delta: float) -> void:
@@ -20,6 +19,15 @@ func UpdateBulletDisplay():
 		newTexture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED  # Keeps the image's aspect ratio
 		newTexture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 		hBox.add_child(newTexture)
+		
+func UpdateLivesDisplay():
+	for i in Global.lives:
+		var newTexture = TextureRect.new()
+		newTexture.texture = preload("res://Assets/Heart.png")
+		newTexture.custom_minimum_size = Vector2(40, 0)  # Set minimum size
+		newTexture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED  # Keeps the image's aspect ratio
+		newTexture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		$CanvasLayer/LivesContainer.add_child(newTexture)
 
 func UseBullet():
 	for bullet in hBox.get_children():

@@ -173,6 +173,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 12.0
 
 [node name="HealTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.15
 
 [connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

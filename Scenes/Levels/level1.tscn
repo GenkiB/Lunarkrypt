@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bg5wktugvcw2n"]
+[gd_scene load_steps=21 format=4 uid="uid://bg5wktugvcw2n"]
 
 [ext_resource type="Script" path="res://Scripts/level_1.gd" id="1_82jb8"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="1_bq4wr"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c2gufcmqvt2nj" path="res://Scenes/door.tscn" id="13_sfevm"]
 [ext_resource type="PackedScene" uid="uid://der6obndl464u" path="res://Scenes/tutorial_ui.tscn" id="14_eylkp"]
 [ext_resource type="Texture2D" uid="uid://b2l8ocjqkfmml" path="res://Assets/97.png" id="14_u04g6"]
+[ext_resource type="PackedScene" uid="uid://wm8bhqbuweep" path="res://Scenes/controlshud.tscn" id="16_oap5w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j47rm"]
 texture = ExtResource("4_v28vk")
@@ -232,12 +233,16 @@ shape = SubResource("RectangleShape2D_ei6j1")
 
 [node name="HUD" parent="." instance=ExtResource("11_lxtlb")]
 
+[node name="ControlsHUD" parent="." instance=ExtResource("16_oap5w")]
+
 [node name="WeaponPickup" parent="." instance=ExtResource("12_tppey")]
 position = Vector2(3523.16, 439.828)
 
 [node name="TutorialUI" parent="." instance=ExtResource("14_eylkp")]
+visible = false
 
 [node name="PlayerStart" type="Node2D" parent="."]
+visible = false
 position = Vector2(160, 367.482)
 
 [node name="TextureRect" type="TextureRect" parent="PlayerStart"]

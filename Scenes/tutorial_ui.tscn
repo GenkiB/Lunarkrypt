@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://der6obndl464u"]
+[gd_scene load_steps=4 format=3 uid="uid://der6obndl464u"]
 
 [ext_resource type="Texture2D" uid="uid://dt7l8yywybxfd" path="res://Assets/panel-001.png" id="1_3wtvp"]
 [ext_resource type="Script" path="res://Scripts/tutorial_ui.gd" id="1_y718g"]
+[ext_resource type="FontFile" uid="uid://bdtc7mftit5hh" path="res://Assets/Fonts/Amatic-Bold.ttf" id="3_iqs4o"]
 
 [node name="TutorialUI" type="CanvasLayer"]
-visible = false
 script = ExtResource("1_y718g")
 
 [node name="TutorialUI" type="Control" parent="."]
@@ -59,7 +59,8 @@ offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_iqs4o")
+theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1

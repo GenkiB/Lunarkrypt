@@ -3,9 +3,11 @@ extends Node
 @onready var playerStart:Node2D = get_node("PlayerStart")
 @onready var player:Node = get_node("Player")
 @onready var tutorialUI = get_node("TutorialUI")
+@onready var weapon: Resource = preload("res://Scenes/Weapon Resources/Pistol.tres")
 var hasKilledBoss
 
 func _ready() -> void:
+	Global.whichLevel = "Level1"
 	ShowTutorialUI()
 	ShowDashTooltip()
 	# May need to reuse this code for camera snapping in subsequent levels

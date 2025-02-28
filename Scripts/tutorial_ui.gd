@@ -11,3 +11,6 @@ func SetTextBossWarning():
 
 func SetTextDoubleJump():
 	$TutorialUI/Control/TipLabel.text = "You have obtained the Double Jump Skill!\nPress Spacebar in quick succession to reach new heights."
+
+func SetTextSpikesWarning():
+	$TutorialUI/Control/TipLabel.text = "Beware of Spikes!\nUse Dash or Double Jump to avoid them."

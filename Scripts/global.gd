@@ -1,7 +1,10 @@
 extends Node
 
 var firstBossDead:bool = false
+var secondBossDead = false
 var globalBulletOwner:String = ""
+var whichLevel:String = ""
+var lives:int = 3
 
 var weapons:Dictionary = {
 	"Pistol" : preload("res://Scenes/Weapon Resources/Pistol.tres"),

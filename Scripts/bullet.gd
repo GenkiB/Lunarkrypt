@@ -6,7 +6,7 @@ var bossBulletSpeed = 40000
 var bulletOwner:String = ""
 var playerBulletDamage:float = 17
 var enemyBulletDamage:float = 9
-var bossBulletDamage:float = 25
+var bossBulletDamage:float = 17
 
 func _ready() -> void:
 	pass

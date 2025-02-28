@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpwqyq3hl2leu"]
+[gd_scene load_steps=3 format=3 uid="uid://bay5if3n1wmh2"]
 
-[ext_resource type="PackedScene" uid="uid://bpsrqniuk7pro" path="res://Scenes/monster.tscn" id="1_x6lk0"]
-[ext_resource type="Script" path="res://Scripts/monsterboss_1.gd" id="2_pwnch"]
+[ext_resource type="PackedScene" uid="uid://bpsrqniuk7pro" path="res://Scenes/monster.tscn" id="1_eoaiq"]
+[ext_resource type="Script" path="res://Scripts/monsterboss_2.gd" id="2_l82lm"]
 
-[node name="MonsterBoss1" instance=ExtResource("1_x6lk0")]
+[node name="MonsterBoss2" instance=ExtResource("1_eoaiq")]
 scale = Vector2(5, 5)
-script = ExtResource("2_pwnch")
+script = ExtResource("2_l82lm")
 
 [node name="CollisionShape2D" parent="." index="1"]
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" parent="." index="2"]
 position = Vector2(0, -9.565)
-region_rect = Rect2(219.646, 245.989, 93.2192, 97.9602)
+region_rect = Rect2(318, 115, 103, 96)
 
 [node name="CollisionShape2D" parent="HeadDamage" index="0"]
 metadata/_edit_lock_ = true
@@ -24,7 +24,7 @@ position = Vector2(3.05176e-05, -10.8)
 metadata/_edit_lock_ = true
 
 [node name="ShootTimer" parent="." index="9"]
-wait_time = 1.75
+wait_time = 1.0
 
 [node name="CollisionShape2D" parent="DashDetector" index="0"]
 position = Vector2(-0.6, -10.315)

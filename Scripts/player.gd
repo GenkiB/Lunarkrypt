@@ -16,6 +16,7 @@ var isFalling:bool = false
 var gunDirection:int
 var gunPositionX:float = 50
 var dashDamage:float = 75
+var isDead:bool = false
 
 #States
 var currentState:String = ""
@@ -32,6 +33,8 @@ var jumpCount = 0
 @onready var HUD:Control = get_parent().get_node("HUD")
 @onready var level = get_tree().current_scene
 @onready var tutorialUI = get_parent().get_node("TutorialUI")
+@onready var controlsHUD = get_parent().get_node("ControlsHUD")
+@onready var gameOverScreen:PackedScene = preload("res://Scenes/Levels/game_over.tscn")
 
 var hasShownReloadTip = false
 
@@ -40,6 +43,7 @@ func _ready() -> void:
 	ChangeState("idle")
 	gunDirection = 1
 	gunPositionX = SetDisplayedWeapon()
+	isDead = false
 	
 func _physics_process(delta: float) -> void:
 	
@@ -117,10 +121,16 @@ func _physics_process(delta: float) -> void:
 		if hasShownReloadTip:
 			level.HideTutorialUI()
 			
-	if Global.bulletsInMag <= 0 and !hasShownReloadTip and get_tree().get_current_scene().name == "level1":
+	if Global.bulletsInMag <= 0 and !hasShownReloadTip and get_tree().get_current_scene().name == "Level1":
+		print("showreload")
 		level.ShowTutorialUI()
 		tutorialUI.SetTextReloadTip()
 		hasShownReloadTip = true
+		
+	if Input.is_action_just_pressed("Tab"):
+		controlsHUD.ShowControlsText()
+	if Input.is_action_just_released("Tab"):
+		controlsHUD.ShowDefaultText()
 			
 	move_and_slide()
 
@@ -159,11 +169,27 @@ func TakeDamage(amount:float):
 	$BloodParticles.emitting = true
 	$HealTimer.stop()
 	health -= amount
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1.75).timeout
 	$HealTimer.start()
 
 func Death():
-	pass
+	if !isDead:
+		Global.lives -= 1
+		HUD.UpdateLivesDisplay()
+		isDead = true
+		if Global.lives > 0:
+			if Global.whichLevel == "Level1":
+				get_tree().change_scene_to_file("res://Scenes/Levels/level1.tscn")
+				isDead = false
+			if Global.whichLevel == "Level2":
+				get_tree().change_scene_to_file("res://Scenes/Levels/level2.tscn")
+				isDead = false
+		elif Global.lives == 0: 
+			get_tree().change_scene_to_file("res://Scenes/Levels/game_over.tscn")
+			#var tempGameOver = gameOverScreen.instantiate()
+			#get_parent().add_child(tempGameOver)
+			#$AnimatedSprite2D.visible = false
+
 
 func SetDisplayedWeapon() -> float:
 	if Global.currentWeapon.weaponName == "Pistol":

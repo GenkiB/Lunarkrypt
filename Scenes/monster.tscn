@@ -55,15 +55,13 @@ region_rect = Rect2(224.221, 28.2361, 85.6872, 78.2361)
 
 [node name="WallCheck" type="RayCast2D" parent="."]
 target_position = Vector2(57, 0)
-collision_mask = 256
 
 [node name="CliffCheck" type="RayCast2D" parent="."]
 position = Vector2(62, 0)
-collision_mask = 256
 
 [node name="ShootCheck" type="RayCast2D" parent="."]
 position = Vector2(0, -6)
-collision_mask = 0
+collision_mask = 2
 collide_with_bodies = false
 
 [node name="HeadDamage" type="Area2D" parent="."]

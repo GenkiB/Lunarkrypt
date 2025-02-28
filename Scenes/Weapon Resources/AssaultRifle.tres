@@ -6,4 +6,4 @@
 script = ExtResource("1_6j4yh")
 weaponName = "AssaultRifle"
 magSize = 20
-weaponDamage = 24
+weaponDamage = 32

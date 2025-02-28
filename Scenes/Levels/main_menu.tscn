@@ -1,0 +1,146 @@
+[gd_scene load_steps=5 format=3 uid="uid://codasvpx1hxsg"]
+
+[ext_resource type="FontFile" uid="uid://bdtc7mftit5hh" path="res://Assets/Fonts/Amatic-Bold.ttf" id="1_0uoba"]
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_5d5kw"]
+[ext_resource type="Texture2D" uid="uid://ctb7ah2g4bgb5" path="res://Assets/OddPhishGamesLogoWhite.png" id="2_luqq8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veks8"]
+bg_color = Color(0.187176, 0.187176, 0.187176, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5d5kw")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_veks8")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1000, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -465.887
+offset_right = 500.0
+offset_bottom = 34.1135
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.877616, 0.877616, 0.877616, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("1_0uoba")
+theme_override_font_sizes/font_size = 296
+text = "Lunarcrypt"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 24.6078
+offset_right = 200.0
+offset_bottom = 124.608
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_0uoba")
+theme_override_font_sizes/font_size = 116
+
+[node name="Label" type="Label" parent="PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_0uoba")
+theme_override_font_sizes/font_size = 100
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="."]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 153.333
+offset_right = 200.0
+offset_bottom = 253.333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_0uoba")
+theme_override_font_sizes/font_size = 116
+
+[node name="Label" type="Label" parent="QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -17.3033
+offset_bottom = -9.30334
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_0uoba")
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.7154
+offset_top = -166.631
+offset_right = 63.7154
+offset_bottom = -126.631
+grow_vertical = 0
+scale = Vector2(3.6, 3.6)
+
+[node name="OddPhishGamesLogoWhite" type="TextureRect" parent="Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_luqq8")
+expand_mode = 1
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
