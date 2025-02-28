@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dx865o7n46ush"]
+[gd_scene load_steps=4 format=3 uid="uid://dx865o7n46ush"]
 
 [ext_resource type="PackedScene" uid="uid://bpsrqniuk7pro" path="res://Scenes/monster.tscn" id="1_3gw5q"]
 [ext_resource type="Script" path="res://Scripts/monsterbug.gd" id="2_ka0wf"]
+[ext_resource type="AudioStream" uid="uid://66btks10viq2" path="res://Audio/SFX_MonsterTakeDamage.ogg" id="3_1f77w"]
 
 [node name="MonsterBug" instance=ExtResource("1_3gw5q")]
 script = ExtResource("2_ka0wf")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 region_rect = Rect2(122.707, 130.987, 98.9187, 80.1298)
+
+[node name="SFX_TakeDamage" parent="." index="14"]
+stream = ExtResource("3_1f77w")
+volume_db = -80.0

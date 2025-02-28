@@ -7,6 +7,7 @@ var dash_node: PackedScene = preload("res://Scenes/player_dash.tscn")
 var pos: bool
 
 func reset_node() -> void:
+	get_parent().get_parent().get_node("SFX_Dash").play()
 	pos = player.anim.flip_h
 	player.canDash = false
 	if pos:

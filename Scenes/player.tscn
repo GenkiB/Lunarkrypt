@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btc1iel6mbh5l"]
+[gd_scene load_steps=23 format=3 uid="uid://btc1iel6mbh5l"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_becjd"]
 [ext_resource type="Texture2D" uid="uid://bv4vgq6d0sryw" path="res://Assets/Player.png" id="2_p1oh4"]
@@ -9,6 +9,12 @@
 [ext_resource type="Script" path="res://Assets/States/dash_state.gd" id="7_pmo78"]
 [ext_resource type="Texture2D" uid="uid://i5rryx2rmx47" path="res://Assets/Weapons and Items.png" id="8_i1bme"]
 [ext_resource type="Texture2D" uid="uid://boqoa7luxgf5v" path="res://Assets/ExplosionParticles.png" id="9_0rx3c"]
+[ext_resource type="AudioStream" uid="uid://dx36qpuvoi6jq" path="res://Audio/SFX_Shoot.ogg" id="10_tsrwn"]
+[ext_resource type="AudioStream" uid="uid://blfl6fncb2onv" path="res://Audio/SFX_Reload.ogg" id="11_r6oo0"]
+[ext_resource type="AudioStream" uid="uid://iogkbbhsvea5" path="res://Audio/SFX_Jump.ogg" id="12_uh825"]
+[ext_resource type="AudioStream" uid="uid://b1b3nx6yfki5p" path="res://Audio/SFX_Dash.ogg" id="13_2dxqg"]
+[ext_resource type="AudioStream" uid="uid://cfo4y0ds2j4fk" path="res://Audio/SFX_EmptyMag.ogg" id="14_wyw00"]
+[ext_resource type="AudioStream" uid="uid://dktxipi5i72gm" path="res://Audio/SFX_PlayerGore.ogg" id="15_vy3ne"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jp4d0"]
 atlas = ExtResource("2_p1oh4")
@@ -174,5 +180,25 @@ position_smoothing_speed = 12.0
 
 [node name="HealTimer" type="Timer" parent="."]
 wait_time = 0.15
+
+[node name="SFX_Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_tsrwn")
+
+[node name="SFX_Reload" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_r6oo0")
+volume_db = 8.0
+
+[node name="SFX_Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_uh825")
+
+[node name="SFX_Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_2dxqg")
+volume_db = 6.0
+
+[node name="SFX_NoAmmo" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_wyw00")
+
+[node name="SFX_Gore" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_vy3ne")
 
 [connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

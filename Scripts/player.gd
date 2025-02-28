@@ -100,6 +100,7 @@ func _physics_process(delta: float) -> void:
 	#Shooting
 	if Input.is_action_just_pressed("Shoot"):
 		if CanShoot(get_global_mouse_position()) and Global.bulletsInMag > 0:
+			$SFX_Shoot.play()
 			HUD.UseBullet()
 			SpawnBulletParticles()
 			var bulletTemp = bulletScene.instantiate()
@@ -112,9 +113,13 @@ func _physics_process(delta: float) -> void:
 			bulletTemp.bulletOwner = "player"
 			get_node("../BulletContainer").add_child(bulletTemp)
 			Global.bulletsInMag -= 1
+		if CanShoot(get_global_mouse_position()) and Global.bulletsInMag <= 0:
+			$SFX_NoAmmo.play()
+		
 			
 	if Input.is_action_just_pressed("Reload"):
 		if Global.bulletsInMag < Global.magSize:
+			$SFX_Reload.play()
 			Global.bulletsInMag = Global.magSize
 			HUD.ClearHBox()
 			HUD.RefillHBox()
@@ -166,6 +171,7 @@ func SpawnBulletParticles():
 	
 func TakeDamage(amount:float):
 	await get_tree().create_timer(0.1).timeout
+	$SFX_Gore.play()
 	$BloodParticles.emitting = true
 	$HealTimer.stop()
 	health -= amount

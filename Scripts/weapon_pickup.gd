@@ -5,6 +5,7 @@ extends Area2D
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
+		player.get_node("SFX_Reload").play()
 		player.RecalculateGunDirection()
 		Global.currentWeapon = weapon
 		Global.bulletsInMag = Global.currentWeapon.magSize

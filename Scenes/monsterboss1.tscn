@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpwqyq3hl2leu"]
+[gd_scene load_steps=4 format=3 uid="uid://cpwqyq3hl2leu"]
 
 [ext_resource type="PackedScene" uid="uid://bpsrqniuk7pro" path="res://Scenes/monster.tscn" id="1_x6lk0"]
 [ext_resource type="Script" path="res://Scripts/monsterboss_1.gd" id="2_pwnch"]
+[ext_resource type="AudioStream" uid="uid://coxvuibb3jxlq" path="res://Audio/SFX_BossPoison.ogg" id="3_vmxux"]
 
 [node name="MonsterBoss1" instance=ExtResource("1_x6lk0")]
 scale = Vector2(5, 5)
@@ -29,3 +30,7 @@ wait_time = 1.75
 [node name="CollisionShape2D" parent="DashDetector" index="0"]
 position = Vector2(-0.6, -10.315)
 metadata/_edit_lock_ = true
+
+[node name="SFX_ShootPoison" parent="." index="15"]
+stream = ExtResource("3_vmxux")
+volume_db = 2.0

@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func TakeDamage(amount:int):
+	$SFX_TakeDamage.play()
 	$BloodParticles.emitting = true
 	health -= amount
 
@@ -86,6 +87,7 @@ func _on_shoot_timer_timeout() -> void:
 			poisonBulletTemp.position = self.global_position
 			poisonBulletTemp.direction = (get_parent().get_node("Player").global_position - self.global_position).normalized()
 			get_parent().get_node("BulletContainer").add_child(poisonBulletTemp)
+		$SFX_ShootPoison.play()
 		
 func _on_dash_detector_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):

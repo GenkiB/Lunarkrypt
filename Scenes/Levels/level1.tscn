@@ -269,6 +269,8 @@ collision_mask = 2
 position = Vector2(86.2671, 97.5808)
 shape = SubResource("RectangleShape2D_e7k5s")
 
+[node name="AudioContainer" type="Node" parent="."]
+
 [connection signal="body_entered" from="Doublejumppickup" to="Doublejumppickup" method="_on_body_entered"]
 [connection signal="body_entered" from="BossTrigger" to="MonsterBoss1" method="_on_boss_trigger_body_entered"]
 [connection signal="body_entered" from="BossWarningTrigger" to="." method="_on_boss_warning_trigger_body_entered"]
