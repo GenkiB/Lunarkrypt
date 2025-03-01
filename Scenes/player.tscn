@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://btc1iel6mbh5l"]
+[gd_scene load_steps=24 format=3 uid="uid://btc1iel6mbh5l"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_becjd"]
 [ext_resource type="Texture2D" uid="uid://bv4vgq6d0sryw" path="res://Assets/Player.png" id="2_p1oh4"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://b1b3nx6yfki5p" path="res://Audio/SFX_Dash.ogg" id="13_2dxqg"]
 [ext_resource type="AudioStream" uid="uid://cfo4y0ds2j4fk" path="res://Audio/SFX_EmptyMag.ogg" id="14_wyw00"]
 [ext_resource type="AudioStream" uid="uid://dktxipi5i72gm" path="res://Audio/SFX_PlayerGore.ogg" id="15_vy3ne"]
+[ext_resource type="AudioStream" uid="uid://docxk70hhuvs" path="res://Audio/SFX_PlayerTakeDamage.ogg" id="16_3uwsp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jp4d0"]
 atlas = ExtResource("2_p1oh4")
@@ -183,22 +184,33 @@ wait_time = 0.15
 
 [node name="SFX_Shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_tsrwn")
+bus = &"SFX"
 
 [node name="SFX_Reload" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_r6oo0")
 volume_db = 8.0
+bus = &"SFX"
 
 [node name="SFX_Jump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("12_uh825")
+bus = &"SFX"
 
 [node name="SFX_Dash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_2dxqg")
 volume_db = 6.0
+bus = &"SFX"
 
 [node name="SFX_NoAmmo" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_wyw00")
+bus = &"SFX"
 
 [node name="SFX_Gore" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_vy3ne")
+bus = &"SFX"
+
+[node name="SFX_TakeDamage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_3uwsp")
+volume_db = -6.0
+bus = &"Interface"
 
 [connection signal="timeout" from="HealTimer" to="." method="_on_heal_timer_timeout"]

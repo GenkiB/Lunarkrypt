@@ -7,6 +7,8 @@ extends Node
 @onready var tutorialUI = get_node("TutorialUI")
 
 func _ready() -> void:
+	$AudioContainer/Ambience_Level2.play()
+	PlayPlayerDeath()
 	Global.whichLevel = "Level2"
 	Skills.hasUnlockedDoubleJump = true 
 	$Player.position = playerStart.global_position
@@ -31,3 +33,10 @@ func _process(delta: float) -> void:
 	if Global.secondBossDead == true and get_node("DoorEnd") != null:
 		get_node("DoorEnd").visible = true
 	
+func PlayEnemyDeath(globalPos:Vector2):
+	$AudioContainer/SFX_EnemyDeath.global_position = globalPos
+	$AudioContainer/SFX_EnemyDeath.play()
+
+func PlayPlayerDeath():
+	$AudioContainer/SFX_PlayerDeath.global_position = $PlayerStart.global_position
+	$AudioContainer/SFX_PlayerDeath.play()

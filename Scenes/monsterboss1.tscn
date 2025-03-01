@@ -31,6 +31,6 @@ wait_time = 1.75
 position = Vector2(-0.6, -10.315)
 metadata/_edit_lock_ = true
 
-[node name="SFX_ShootPoison" parent="." index="15"]
+[node name="SFX_ShootPoison" parent="." index="16"]
 stream = ExtResource("3_vmxux")
 volume_db = 2.0

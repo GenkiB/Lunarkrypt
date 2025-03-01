@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://codasvpx1hxsg"]
+[gd_scene load_steps=7 format=3 uid="uid://codasvpx1hxsg"]
 
 [ext_resource type="FontFile" uid="uid://bdtc7mftit5hh" path="res://Assets/Fonts/Amatic-Bold.ttf" id="1_0uoba"]
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_5d5kw"]
 [ext_resource type="Texture2D" uid="uid://ctb7ah2g4bgb5" path="res://Assets/OddPhishGamesLogoWhite.png" id="2_luqq8"]
+[ext_resource type="AudioStream" uid="uid://baffwu4hbs1xr" path="res://Audio/Music_Menu.ogg" id="4_mlilc"]
+[ext_resource type="AudioStream" uid="uid://5dojh27fll1d" path="res://Audio/Interface_ButtonPress.ogg" id="5_1qc5y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veks8"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 1)
+bg_color = Color(0.051971, 0.0519709, 0.051971, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -52,7 +54,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("1_0uoba")
 theme_override_font_sizes/font_size = 296
-text = "Lunarcrypt"
+text = "Lunarkrypt"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -141,6 +143,15 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_luqq8")
 expand_mode = 1
+
+[node name="Music_Menu" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mlilc")
+volume_db = 16.0
+parameters/looping = true
+
+[node name="Interface_ButtonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1qc5y")
+volume_db = 20.0
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

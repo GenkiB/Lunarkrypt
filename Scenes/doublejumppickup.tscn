@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d20gt6bthh7hf"]
+[gd_scene load_steps=5 format=3 uid="uid://d20gt6bthh7hf"]
 
 [ext_resource type="TileSet" uid="uid://kaf2pui1ocdu" path="res://Assets/MapTileset.tres" id="1_o4hha"]
+[ext_resource type="AudioStream" uid="uid://68snvu82knay" path="res://Audio/SFX_Reward.ogg" id="2_0g2ps"]
+[ext_resource type="AudioStream" uid="uid://cy7oikyeutvpf" path="res://Audio/SFX_Pickup.ogg" id="3_3ldbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdug6"]
 size = Vector2(58.135, 77.5)
@@ -14,3 +16,11 @@ shape = SubResource("RectangleShape2D_kdug6")
 position = Vector2(-35.0395, -32.9308)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 5, 0, 6, 0, 0, 0)
 tile_set = ExtResource("1_o4hha")
+
+[node name="SFX_Reward" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0g2ps")
+volume_db = 20.0
+bus = &"SFX"
+
+[node name="SFX_Pickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3ldbi")

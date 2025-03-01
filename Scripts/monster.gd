@@ -7,6 +7,7 @@ class_name Monster
 @onready var rayCliff:RayCast2D = get_node("CliffCheck")
 @onready var rayShoot:RayCast2D = get_node("ShootCheck")
 @onready var player:CharacterBody2D = get_parent().get_node("Player")
+var gore_sfx = [preload("res://Audio/SFX_MonsterGore1.ogg"), preload("res://Audio/SFX_MonsterGore2.ogg")]
 
 var speed:float = 100
 var changeDir:bool = true
@@ -42,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		get_node("Sprite2D").flip_h = false
 	
 	if health <= 0:
+		get_parent().PlayEnemyDeath(self.global_position)
 		await get_tree().create_timer(0.25).timeout
 		queue_free()
 		
@@ -53,6 +55,9 @@ func _physics_process(delta: float) -> void:
 
 func TakeDamage(amount:int):
 	$SFX_TakeDamage.play()
+	var chosenGore = gore_sfx[randi() % gore_sfx.size()]
+	$SFX_Gore.stream = chosenGore
+	$SFX_Gore.play()
 	$BloodParticles.emitting = true
 	health -= amount
 

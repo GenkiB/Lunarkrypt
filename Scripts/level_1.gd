@@ -7,6 +7,8 @@ extends Node
 var hasKilledBoss
 
 func _ready() -> void:
+	$AudioContainer/Ambience_Level1.play()
+	PlayPlayerDeath()
 	Global.whichLevel = "Level1"
 	ShowTutorialUI()
 	ShowDashTooltip()
@@ -40,3 +42,11 @@ func _on_boss_warning_trigger_body_entered(body: Node2D) -> void:
 func _on_boss_warning_trigger_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		HideTutorialUI()
+
+func PlayEnemyDeath(globalPos:Vector2):
+	$AudioContainer/SFX_EnemyDeath.global_position = globalPos
+	$AudioContainer/SFX_EnemyDeath.play()
+	
+func PlayPlayerDeath():
+	$AudioContainer/SFX_PlayerDeath.global_position = $PlayerStart.global_position
+	$AudioContainer/SFX_PlayerDeath.play()

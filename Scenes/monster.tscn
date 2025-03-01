@@ -124,9 +124,16 @@ wait_time = 2.5
 
 [node name="SFX_TakeDamage" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_fn4pw")
+volume_db = 4.0
+bus = &"SFX"
+
+[node name="SFX_Gore" type="AudioStreamPlayer2D" parent="."]
+volume_db = 8.0
+bus = &"SFX"
 
 [node name="SFX_ShootPoison" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_wm1a2")
+bus = &"SFX"
 
 [connection signal="body_entered" from="HeadDamage" to="." method="_on_head_damage_body_entered"]
 [connection signal="body_entered" from="DamagePlayerArea" to="." method="_on_damage_player_area_body_entered"]

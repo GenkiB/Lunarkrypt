@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bwqj6ke3f1ddw"]
+[gd_scene load_steps=23 format=4 uid="uid://bwqj6ke3f1ddw"]
 
 [ext_resource type="Script" path="res://Scripts/level_2.gd" id="1_wkoyj"]
 [ext_resource type="PackedScene" uid="uid://btc1iel6mbh5l" path="res://Scenes/player.tscn" id="2_0alsu"]
@@ -14,8 +14,10 @@
 [ext_resource type="TileSet" uid="uid://bcn2q4pwb4xou" path="res://Assets/lv2_tile_set.tres" id="14_dckuq"]
 [ext_resource type="PackedScene" uid="uid://der6obndl464u" path="res://Scenes/tutorial_ui.tscn" id="15_1rvdi"]
 [ext_resource type="Texture2D" uid="uid://b2l8ocjqkfmml" path="res://Assets/97.png" id="15_ax35x"]
-[ext_resource type="Script" path="res://Scripts/doorEnd.gd" id="15_t1qt5"]
 [ext_resource type="PackedScene" uid="uid://wm8bhqbuweep" path="res://Scenes/controlshud.tscn" id="16_aqoq6"]
+[ext_resource type="AudioStream" uid="uid://cnxbudllj1cfn" path="res://Audio/SFX_EnemyDeath.ogg" id="17_8rqfl"]
+[ext_resource type="AudioStream" uid="uid://cf224ag4veha7" path="res://Audio/SFX_PlayerDeath.ogg" id="18_57js4"]
+[ext_resource type="AudioStream" uid="uid://cmb3d8625yjpq" path="res://Audio/Ambience_Level2_Loop.ogg" id="18_ua5fp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j47rm"]
 texture = ExtResource("5_n4wu5")
@@ -521,10 +523,26 @@ position = Vector2(3379.36, 1410.96)
 [node name="DoorEnd" parent="." instance=ExtResource("14_0ulaa")]
 visible = false
 position = Vector2(4065.19, 1520.57)
-script = ExtResource("15_t1qt5")
 
 [node name="TutorialUI" parent="." instance=ExtResource("15_1rvdi")]
 visible = false
+
+[node name="AudioContainer" type="Node" parent="."]
+
+[node name="SFX_EnemyDeath" type="AudioStreamPlayer2D" parent="AudioContainer"]
+stream = ExtResource("17_8rqfl")
+volume_db = 4.0
+bus = &"SFX"
+
+[node name="SFX_PlayerDeath" type="AudioStreamPlayer2D" parent="AudioContainer"]
+stream = ExtResource("18_57js4")
+volume_db = 10.0
+panning_strength = 0.2
+bus = &"Interface"
+
+[node name="Ambience_Level2" type="AudioStreamPlayer" parent="AudioContainer"]
+stream = ExtResource("18_ua5fp")
+parameters/looping = true
 
 [connection signal="body_entered" from="TrapsContainer/Spikes/Area2D" to="TrapsContainer/Spikes" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="TrapsContainer/Spikes2/Area2D" to="TrapsContainer/Spikes2" method="_on_area_2d_body_entered"]

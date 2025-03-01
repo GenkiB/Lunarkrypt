@@ -44,6 +44,7 @@ func _ready() -> void:
 	gunDirection = 1
 	gunPositionX = SetDisplayedWeapon()
 	isDead = false
+	Skills.hasUnlockedDoubleJump = false
 	
 func _physics_process(delta: float) -> void:
 	
@@ -138,6 +139,7 @@ func _physics_process(delta: float) -> void:
 		controlsHUD.ShowDefaultText()
 			
 	move_and_slide()
+	
 
 func ChangeState(newStateName:String):
 	currentState = newStateName
@@ -170,12 +172,13 @@ func SpawnBulletParticles():
 		$GunAssaultRifle/AssaultBulletSpawn/CPUParticles2D.emitting = true
 	
 func TakeDamage(amount:float):
+	$SFX_TakeDamage.play()
 	await get_tree().create_timer(0.1).timeout
 	$SFX_Gore.play()
 	$BloodParticles.emitting = true
 	$HealTimer.stop()
 	health -= amount
-	await get_tree().create_timer(1.75).timeout
+	await get_tree().create_timer(2.5).timeout
 	$HealTimer.start()
 
 func Death():
@@ -192,11 +195,7 @@ func Death():
 				isDead = false
 		elif Global.lives == 0: 
 			get_tree().change_scene_to_file("res://Scenes/Levels/game_over.tscn")
-			#var tempGameOver = gameOverScreen.instantiate()
-			#get_parent().add_child(tempGameOver)
-			#$AnimatedSprite2D.visible = false
-
-
+	
 func SetDisplayedWeapon() -> float:
 	if Global.currentWeapon.weaponName == "Pistol":
 		return pistolSprite.position.x

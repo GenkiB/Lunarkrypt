@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bdtc7mftit5hh" path="res://Assets/Fonts/Amatic-Bold.ttf" id="2_db6kr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dvts"]
-bg_color = Color(0.188235, 0.188235, 0.188235, 1)
+bg_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
 
 [node name="GameOver" type="CanvasLayer"]
 
