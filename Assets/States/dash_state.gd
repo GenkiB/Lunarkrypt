@@ -17,7 +17,6 @@ func reset_node() -> void:
 	await get_tree().create_timer(0.4).timeout
 	player.ChangeState("idle")
 
-#this could be a bug of which way to flip the dash sprite
 func _physics_process(delta: float) -> void:
 	pos = player.anim.flip_h
 	if player.currentState == "dash":

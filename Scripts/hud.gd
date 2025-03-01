@@ -7,7 +7,6 @@ func _ready() -> void:
 	UpdateBulletDisplay()
 	UpdateLivesDisplay()
 	
-
 func _process(delta: float) -> void:
 	$CanvasLayer/HPBar.value = player.health
 
@@ -39,7 +38,6 @@ func UseBullet():
 func ClearHBox():
 	for bullet in hBox.get_children():
 		bullet.queue_free()  # Remove and free the existing bullet nodes
-	#RefillHBox()
 
 func RefillHBox():
 	for i in range(Global.magSize):
@@ -47,7 +45,7 @@ func RefillHBox():
 		new_texture.texture = preload("res://Assets/PixelBullet.png")
 		new_texture.custom_minimum_size = Vector2(40, 0)  # Set minimum size to avoid shrinking
 
-		  # Set stretch mode to keep aspect ratio and prevent stretching
+		# Set stretch mode to keep aspect ratio and prevent stretching
 		new_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED  # Keeps the image's aspect ratio
 		new_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL  # Optional: maintain proportions
 

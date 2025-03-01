@@ -137,6 +137,9 @@ func _physics_process(delta: float) -> void:
 		controlsHUD.ShowControlsText()
 	if Input.is_action_just_released("Tab"):
 		controlsHUD.ShowDefaultText()
+		
+	if Input.is_action_just_pressed("Esc"):
+		get_tree().quit()
 			
 	move_and_slide()
 	
